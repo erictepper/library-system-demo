@@ -1,4 +1,5 @@
 # library-system-demo
+## General Info
 System that can track books and AV equipment that employees borrow from a library. Implemented on the Salesforce platform. 
 
 ## Demo Information
