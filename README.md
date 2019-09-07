@@ -5,7 +5,7 @@ System that can track books and AV equipment that employees borrow from a librar
 ### 1. Library System
 ConForceSo Corporation wants to create a system to track books and AV equipment that employees can borrow from a library. Design and implement a system on the Salesforce platform to meet the requirements detailed below.
 
-##### REQUIREMENTS:
+#### REQUIREMENTS:
 * **Firm Requirements:** 
 	* All library items, their type, and their current status should be searchable/browsable in the system
 	* The system should track who currently has items checked out, as well as the borrowing history for each item
@@ -17,7 +17,7 @@ ConForceSo Corporation wants to create a system to track books and AV equipment 
 	* There should be borrowing limits for different types of items, and the system should determine whether items are overdue
 	* The system should send a reminder to users with overdue items
 
-##### Items expected in this solution: 
+#### Items expected in this solution: 
 * One or more Custom Objects and associated Custom Fields and Page Layouts
 * One or more Apex Triggers and Classes
 * Custom UI using one or more Lightning Components
