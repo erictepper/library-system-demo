@@ -5,6 +5,9 @@
         "paths": {
             "c/helloWorld": [
                 "helloWorld/helloWorld.js"
+            ],
+            "c/libraryCatalog": [
+                "libraryCatalog/libraryCatalog.js"
             ]
         }
     },
