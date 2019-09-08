@@ -1,3 +1,8 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 
-export default class LibraryCatalog extends LightningElement {}
+import getLibraryItems from '@salesforce/apex/catalogController.getLibraryItems';
+
+export default class LibraryCatalog extends LightningElement {
+    @wire(getLibraryItems, {})
+    libraryItems;
+}
