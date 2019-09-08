@@ -1,5 +1,6 @@
 <template>
-    <lightning-card title="Catalog" icon-name="custom:custom14">
+    <lightning-card title="Catalog" icon-name="standard:catalog">
+        <lightning-input label="Name" value={nameSearch} onchange={changeHandler}></lightning-input>
         <table id="catalog">
             <tr class = "header">
                 <td>Barcode</td>
@@ -7,13 +8,20 @@
                 <td>Name</td>
                 <td>Status</td>
             </tr>
-            <template for:each={libraryItems.data} for:item="item">
-                <tr key ={item.Id}>
-                    <td>{item.Name}</td>
-                    <td>{item.Type__c}</td>
-                    <td>{item.Title__c}</td>
-                    <td>{item.Available__c}</td>
-                </tr>
+            <template if:true={libraryItems}>
+                <template for:each={libraryItems} for:item="item">
+                    <tr key ={item.Id}>
+                        <td>{item.Name}</td>
+                        <td>{item.Type__c}</td>
+                        <td>{item.Title__c}</td>
+                        <template if:true={item.Available__c}>
+                            <td>Available</td>
+                        </template>
+                        <template if:false={item.Available__c}>
+                            <td>Unavailable</td>
+                        </template>
+                    </tr>
+                </template>
             </template>
         </table>
     </lightning-card>
