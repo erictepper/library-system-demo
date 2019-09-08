@@ -12,7 +12,7 @@
                 </tr>
                 <template if:true={libraryItems}>
                     <template for:each={libraryItems} for:item="item">
-                        <tr key ={item.Id}>
+                        <tr key={item.Id}>
                             <td class="barcode">{item.Name}</td>
                             <td class="type">{item.Type__c}</td>
                             <td class="name">{item.Title__c}</td>
