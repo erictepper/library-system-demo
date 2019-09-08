@@ -1,28 +1,31 @@
 <template>
     <lightning-card title="Catalog" icon-name="standard:catalog">
-        <lightning-input label="Name" value={nameSearch} onchange={changeHandler}></lightning-input>
-        <table id="catalog">
-            <tr class = "header">
-                <td>Barcode</td>
-                <td>Type</td>
-                <td>Name</td>
-                <td>Status</td>
-            </tr>
-            <template if:true={libraryItems}>
-                <template for:each={libraryItems} for:item="item">
-                    <tr key ={item.Id}>
-                        <td>{item.Name}</td>
-                        <td>{item.Type__c}</td>
-                        <td>{item.Title__c}</td>
-                        <template if:true={item.Available__c}>
-                            <td>Available</td>
-                        </template>
-                        <template if:false={item.Available__c}>
-                            <td>Unavailable</td>
-                        </template>
-                    </tr>
+        <div class="slds-m-around_medium">
+            <lightning-input label="Name" value={nameSearch} onchange={changeHandler}></lightning-input>
+            <br />
+            <table id="catalog">
+                <tr class="header">
+                    <td class="barcode">Barcode</td>
+                    <td class="type">Type</td>
+                    <td class="name">Name</td>
+                    <td class="status">Status</td>
+                </tr>
+                <template if:true={libraryItems}>
+                    <template for:each={libraryItems} for:item="item">
+                        <tr key ={item.Id}>
+                            <td class="barcode">{item.Name}</td>
+                            <td class="type">{item.Type__c}</td>
+                            <td class="name">{item.Title__c}</td>
+                            <template if:true={item.Available__c}>
+                                <td class="status"><span class="available">Available</span></td>
+                            </template>
+                            <template if:false={item.Available__c}>
+                                <td class="status"><span class="unavailable">Unavailable</span></td>
+                            </template>
+                        </tr>
+                    </template>
                 </template>
-            </template>
-        </table>
+            </table>
+        </div>
     </lightning-card>
 </template>
