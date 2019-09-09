@@ -3,9 +3,9 @@
         <div class="slds-m-around_medium">
             <table>
                 <tr>
-                    <td class="barcode"></td>
+                    <td class="barcode"><lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} id="bar"></lightning-input></td>
                     <td class="type"></td>
-                    <td class="name"><lightning-input label="Name" value={nameSearch} onchange={changeHandler}></lightning-input></td>
+                    <td class="name"><lightning-input label="Name" value={nameSearch} onchange={changeHandler} id="name"></lightning-input></td>
                     <td class="status"></td>
                 </tr>
             </table>
