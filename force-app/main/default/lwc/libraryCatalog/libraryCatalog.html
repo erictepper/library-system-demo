@@ -4,9 +4,9 @@
             <table class="search">
                 <tr>
                     <td class="barcode"><lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} id="bar"></lightning-input></td>
-                    <td class="type"></td>
+                    <td class="type"><lightning-combobox label="Type" value={typeSearch} placeholder="All" options={typeOptions} onchange={changeHandler} id="type"></lightning-combobox></td>
                     <td class="name"><lightning-input label="Name" value={nameSearch} onchange={changeHandler} id="name"></lightning-input></td>
-                    <td class="status"></td>
+                    <td class="status"><lightning-combobox label="Available?" value={statusSearch} placeholder="All" options={availabilityOptions} onchange={changeHandler} id="status"></lightning-combobox></td>
                 </tr>
             </table>
             <br />
