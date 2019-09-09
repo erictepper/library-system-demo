@@ -4,6 +4,7 @@ import { refreshApex } from '@salesforce/apex';
 import getLibraryItems from '@salesforce/apex/catalogController.getLibraryItems';
 
 export default class LibraryCatalog extends LightningElement {
+    @track libraryUpdate;
     @track libraryItems;
     @track barcodeSearch = "";
     @track typeSearch = "";
@@ -16,7 +17,9 @@ export default class LibraryCatalog extends LightningElement {
         nameSearch: '$nameSearch',
         statusSearch: '$statusSearch'
     })
-    wiredLibraryItems({ error, data }) {
+    wiredLibraryItems(libraryUpdate) {
+        this.libraryUpdate = libraryUpdate;
+        const { error, data } = libraryUpdate;
         if (data) {
             this.libraryItems = data;
             this.error = undefined;
@@ -62,6 +65,6 @@ export default class LibraryCatalog extends LightningElement {
                 this.nameSearch = source[1];
                 break;
         }
-        refreshApex(this.wiredLibraryItems);
+        return refreshApex(this.libraryUpdate);
     }
 }
