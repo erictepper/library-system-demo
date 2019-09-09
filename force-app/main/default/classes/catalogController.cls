@@ -17,7 +17,10 @@ public with sharing class catalogController {
             nameSearch = '%' + nameSearch + '%';
             criteria.add('Title__c LIKE :nameSearch');
         }
-        if (!statusSearch.equals('')) criteria.add('Available__c LIKE :statusSearch');
+        if (!statusSearch.equals('')) {
+            boolean b = statusSearch.equals('true');
+            criteria.add('Available__c = :b');
+        }
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
 
         return Database.query('SELECT Name, Type__c, Title__c, Available__c FROM Library_Item__c ' + whereClause + ' ORDER BY Name DESC');
