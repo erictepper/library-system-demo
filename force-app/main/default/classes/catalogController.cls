@@ -7,10 +7,10 @@ public with sharing class catalogController {
     public static Library_Item__c[] getLibraryItems(String barcodeSearch, String typeSearch, String nameSearch, String statusSearch) {
         String whereClause = '';
         String[] criteria = new String[]{};
-        
+
         if (!barcodeSearch.equals('')) {
             String searchKey = '%' + barcodeSearch + '%';
-            criteria.add('Name LIKE :barcodeSearch');
+            criteria.add('Name LIKE :searchKey');
         }
         if (!typeSearch.equals('')) criteria.add('Type__c LIKE :typeSearch');
         if (!nameSearch.equals('')) {
