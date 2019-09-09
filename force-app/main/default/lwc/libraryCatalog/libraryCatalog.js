@@ -27,8 +27,9 @@ export default class LibraryCatalog extends LightningElement {
     }
 
     changeHandler(event) {
-        var source = event.getSource();
-        switch (source.get('v.id')) {
+        var re = new RegExp('([A-Za-z]+)-?\\d*');
+        var source = event.target.id.match(re);
+        switch (source[1]) {
             case 'bar':
                 this.barcodeSearch = event.target.value;
                 break;
@@ -42,6 +43,7 @@ export default class LibraryCatalog extends LightningElement {
                 this.statusSearch = event.target.value;
                 break;
             default:
+                this.nameSearch = source[1];
                 break;
         }
         refreshApex(this.wiredLibraryItems);
