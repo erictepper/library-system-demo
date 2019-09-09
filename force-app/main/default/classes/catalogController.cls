@@ -3,7 +3,7 @@ public with sharing class catalogController {
 
     }
 
-    @AuraEnabled(Cacheable=True)
+    @AuraEnabled(cacheable=true)
     public static Library_Item__c[] getLibraryItems(String barcodeSearch, String typeSearch, String nameSearch, String statusSearch) {
         String whereClause = '';
         String[] criteria = new String[]{};
@@ -23,6 +23,6 @@ public with sharing class catalogController {
         }
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
 
-        return Database.query('SELECT Name, Type__c, Title__c, Available__c FROM Library_Item__c ' + whereClause + ' ORDER BY Name DESC');
+        return Database.query('SELECT Name, Type__c, Title__c, Available__c FROM Library_Item__c ' + whereClause + ' ORDER BY Available__c DESC, Name DESC');
     }
 }
