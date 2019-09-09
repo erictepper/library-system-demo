@@ -1,6 +1,6 @@
-.search .barcode { padding-right:1%; }
-.search .type { padding-right:1%; }
-.search .name { padding-right:1%; }
+table.search td.barcode { padding-right:1%; }
+table.search td.type { padding-right:1%; }
+table.search td.name { padding-right:1%; }
 
 tr.header { font-weight:bold; }
 td.barcode { width:8%; }
