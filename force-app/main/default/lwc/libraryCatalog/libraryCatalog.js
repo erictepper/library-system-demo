@@ -26,6 +26,22 @@ export default class LibraryCatalog extends LightningElement {
         }
     }
 
+    get typeOptions() {
+        return [
+            { label: 'All', value: '' },
+            { label: 'AV', value: 'AV Equipment' },
+            { label: 'Book', value: 'Book' }
+        ]
+    }
+
+    get availabilityOptions() {
+        return [
+            { label: 'All', value: '' },
+            { label: 'Yes', value: 'true' },
+            { label: 'No', value: 'false' }
+        ]
+    }
+
     changeHandler(event) {
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
@@ -34,13 +50,13 @@ export default class LibraryCatalog extends LightningElement {
                 this.barcodeSearch = event.target.value;
                 break;
             case 'type':
-                this.typeSearch = event.target.value;
+                this.typeSearch = event.detail.value;
                 break;
             case 'name':
                 this.nameSearch = event.target.value;
                 break;
             case 'status':
-                this.statusSearch = event.target.value;
+                this.statusSearch = event.detail.value;
                 break;
             default:
                 this.nameSearch = source[1];
