@@ -9,13 +9,13 @@ public with sharing class catalogController {
         String[] criteria = new String[]{};
 
         if (!barcodeSearch.equals('')) {
-            String searchKey = '%' + barcodeSearch + '%';
-            criteria.add('Name LIKE :searchKey');
+            barcodeSearch = '%' + barcodeSearch + '%';
+            criteria.add('Name LIKE :barcodeSearch');
         }
         if (!typeSearch.equals('')) criteria.add('Type__c LIKE :typeSearch');
         if (!nameSearch.equals('')) {
-            String searchKey = '%' + nameSearch + '%';
-            criteria.add('Title__c LIKE :searchKey');
+            nameSearch = '%' + nameSearch + '%';
+            criteria.add('Title__c LIKE :nameSearch');
         }
         if (!statusSearch.equals('')) criteria.add('Available__c LIKE :statusSearch');
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
