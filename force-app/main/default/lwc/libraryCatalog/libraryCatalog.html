@@ -1,7 +1,14 @@
 <template>
     <lightning-card title="Catalog" icon-name="standard:catalog">
         <div class="slds-m-around_medium">
-            <lightning-input label="Name" value={nameSearch} onchange={changeHandler}></lightning-input>
+            <table>
+                <tr>
+                    <td class="barcode"></td>
+                    <td class="type"></td>
+                    <td class="name"><lightning-input label="Name" value={nameSearch} onchange={changeHandler}></lightning-input></td>
+                    <td class="status"></td>
+                </tr>
+            </table>
             <br />
             <table id="catalog">
                 <tr class="header">
