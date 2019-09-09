@@ -1,27 +1,12 @@
-tr.header {
-    font-weight:bold;
-}
+.search .barcode { padding-right:1%; }
+.search .type { padding-right:1%; }
+.search .name { padding-right:1%; }
 
-td.barcode {
-    width:8%;
-}
+tr.header { font-weight:bold; }
+td.barcode { width:8%; }
+td.type { width:12%; }
+td.name { width:70%; }
+td.status { width:10%; }
 
-td.type {
-    width:12%;
-}
-
-td.name {
-    width:70%;
-}
-
-td.status {
-    width:10%;
-}
-
-span.available {
-    color:green;
-}
-
-span.unavailable {
-    color:red;
-}
+span.available { color:green; }
+span.unavailable { color:red; }
