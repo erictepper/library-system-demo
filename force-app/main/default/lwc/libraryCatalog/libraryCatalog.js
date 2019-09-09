@@ -5,12 +5,16 @@ import getLibraryItems from '@salesforce/apex/catalogController.getLibraryItems'
 
 export default class LibraryCatalog extends LightningElement {
     @track libraryItems;
-    @track nameSearch = "";
+    @track barcodeSearch = "";
     @track typeSearch = "";
+    @track nameSearch = "";
+    @track statusSearch = "";
 
     @wire(getLibraryItems, { 
+        barcodeSearch: '$barcodeSearch',
+        typeSearch: '$typeSearch',
         nameSearch: '$nameSearch',
-        typeSearch: '$typeSearch' 
+        statusSearch: '$statusSearch'
     })
     wiredLibraryItems({ error, data }) {
         if (data) {
@@ -23,7 +27,23 @@ export default class LibraryCatalog extends LightningElement {
     }
 
     changeHandler(event) {
-        this.nameSearch = event.target.value;
+        var source = event.getSource();
+        switch (source.get('v.id')) {
+            case 'bar':
+                this.barcodeSearch = event.target.value;
+                break;
+            case 'type':
+                this.typeSearch = event.target.value;
+                break;
+            case 'name':
+                this.nameSearch = event.target.value;
+                break;
+            case 'status':
+                this.statusSearch = event.target.value;
+                break;
+            default:
+                break;
+        }
         refreshApex(this.wiredLibraryItems);
     }
 }
