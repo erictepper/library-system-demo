@@ -1,4 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 
 import getHighestAvailableBarcode from '@salesforce/apex/controller.getHighestAvailableBarcode';
 
@@ -18,5 +19,18 @@ export default class LibraryCheckout extends LightningElement {
             this.error = error;
             this.contacts = undefined;
         }
+    }
+
+    changeHandler(event) {
+        var re = new RegExp('([A-Za-z]+)-?\\d*');
+        var source = event.target.id.match(re);
+        switch (source[1]) {
+            case 'bar':
+                break;
+            default:
+                this.nameSearch = source[1];
+                break;
+        }
+        return refreshApex(this.barcodeUpdate);
     }
 }
