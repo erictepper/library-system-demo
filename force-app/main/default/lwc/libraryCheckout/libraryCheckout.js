@@ -23,23 +23,8 @@ export default class LibraryCheckout extends LightningElement {
         }
     }
 
-    @wire(checkout, { 
-        employeeId: '$userSearch',
-        barcode: '$barcodeSearch'
-    })
-    wiredCheckout(checkoutUpdate) {
-        this.checkoutUpdate = checkoutUpdate;
-        const { error, data } = checkoutUpdate;
-        if (data) {
-            this.updateResult = data;
-            this.error = undefined;
-        } else if (error) {
-            this.updateResult = undefined;
-            this.error = error;
-        }
-    }
-
     changeHandler(event) {
+        // var searchField;
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
         switch (source[1]) {
@@ -50,8 +35,19 @@ export default class LibraryCheckout extends LightningElement {
                 refreshApex(this.barcodeUpdate);
                 event.target.value = this.barcodeSearch;
                 break;
+            case 'submit':
+                checkout({ employeeId: this.userSearch, 
+                           barcode: this.barcodeSearch })
+                    .then(result => {
+                        this.updateResult = result;
+                    })
+                    .catch(error => {
+                        this.error = error;
+                    });
+                refreshApex(this.barcodeUpdate);
+                break;
             default:
-                this.nameSearch = source[1];
+                this.userSearch = source[1];
                 break;
         }
     }
