@@ -47,12 +47,12 @@ export default class LibraryCheckout extends LightningElement {
                 this.userSearch = event.target.value;
                 break;
             case 'bar':
+                refreshApex(this.barcodeUpdate);
                 event.target.value = this.barcodeSearch;
                 break;
             default:
                 this.nameSearch = source[1];
                 break;
         }
-        return refreshApex(this.barcodeUpdate);
     }
 }
