@@ -36,6 +36,7 @@ export default class LibraryCheckout extends LightningElement {
         // expression matching to get the element id ('elementId')
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
+
         switch (source[1]) {
             case 'user':
                 // updates this.userSearch with the input in the Username field
@@ -47,8 +48,7 @@ export default class LibraryCheckout extends LightningElement {
                 event.target.value = this.barcodeSearch;
                 break;
             case 'submit':
-                // checks out a book if the input is valid, then updates
-                // the barcode input field with the highest available barcode. 
+                // checks out a book if the input is valid 
                 checkout({ employeeId: this.userSearch, 
                            barcode: this.barcodeSearch })
                     .then(result => {
@@ -57,13 +57,15 @@ export default class LibraryCheckout extends LightningElement {
                     .catch(error => {
                         this.error = error;
                     });
+
+                // updates the barcode input field with the highest available barcode
                 refreshApex(this.barcodeUpdate);
                 inputField = this.template.querySelector('.bar');
                 inputField.value = 'lalalalalala'; // debug
                 break;
             default:
-                // updates the username input field with the source name for debugging. 
-                // to be removed and replaced with just a break statement.
+                // updates the username input field with the source name for debugging, 
+                // to be removed and replaced with just a break statement
                 this.userSearch = source[1];
                 break;
         }
