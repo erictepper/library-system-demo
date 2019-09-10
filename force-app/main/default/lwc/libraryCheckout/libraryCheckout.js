@@ -5,14 +5,17 @@ import getHighestAvailableBarcode from '@salesforce/apex/controller.getHighestAv
 import checkout from '@salesforce/apex/controller.checkout';
 
 export default class LibraryCheckout extends LightningElement {
-    barcodeUpdate;
-    @track updateResult;
-    @track userSearch = "";
-    @track barcodeSearch = "";
+    @track barcodeUpdate;  // variable to allow refreshApex(this.barcodeUpdate) to work
+    @track updateResult;  // the result of a checkout submission for debugging. 
+    @track userSearch = "";  // the username of the employee checking out
+    @track barcodeSearch = "";  // the barcode of the library item to check out
 
     @wire(getHighestAvailableBarcode)
     wiredBarcode(barcodeUpdate) {
+        // variable to allow refreshApex(this.barcodeUpdate) to work
         this.barcodeUpdate = barcodeUpdate;
+
+        // get the data or the error returned by the wire
         const { error, data } = barcodeUpdate;
         if (data) {
             this.barcodeSearch = data;
@@ -23,19 +26,29 @@ export default class LibraryCheckout extends LightningElement {
         }
     }
 
+    // handles changes from the client
     changeHandler(event) {
-        // var searchField;
+        // the barcode input field, to update it to the next highest available 
+        // barcode after a library item is checked out
+        var inputField;
+
+        // filters Salesforce's auto-id system ('elementId-##') using regular
+        // expression matching to get the element id ('elementId')
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
         switch (source[1]) {
             case 'user':
+                // updates this.userSearch with the input in the Username field
                 this.userSearch = event.target.value;
                 break;
             case 'bar':
+                // updates the barcode input field with the highest available barcode. 
                 refreshApex(this.barcodeUpdate);
                 event.target.value = this.barcodeSearch;
                 break;
             case 'submit':
+                // checks out a book if the input is valid, then updates
+                // the barcode input field with the highest available barcode. 
                 checkout({ employeeId: this.userSearch, 
                            barcode: this.barcodeSearch })
                     .then(result => {
@@ -45,8 +58,12 @@ export default class LibraryCheckout extends LightningElement {
                         this.error = error;
                     });
                 refreshApex(this.barcodeUpdate);
+                inputField = this.template.querySelector('.bar');
+                inputField.value = 'lalalalalala'; // debug
                 break;
             default:
+                // updates the username input field with the source name for debugging. 
+                // to be removed and replaced with just a break statement.
                 this.userSearch = source[1];
                 break;
         }
