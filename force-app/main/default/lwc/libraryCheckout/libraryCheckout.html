@@ -2,5 +2,5 @@
     <lightning-input label="Employee ID" value={userSearch} onchange={changeHandler} id="user"></lightning-input>
     <lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} id="bar"></lightning-input>
     <br />
-    <center><lightning-button variant="base" label="Check Out" title="Check Out" onclick={handleClick} class="slds-m-left_x-small"></lightning-button></center>
+    <center><lightning-button variant="base" label="Check Out" title="Check Out" onclick={changeHandler} class="slds-m-left_x-small" id="submit"></lightning-button></center>
 </div></lightning-card></template>
