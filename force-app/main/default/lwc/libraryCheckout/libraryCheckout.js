@@ -43,6 +43,9 @@ export default class LibraryCheckout extends LightningElement {
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
         switch (source[1]) {
+            case 'user':
+                this.userSearch = event.target.value;
+                break;
             case 'bar':
                 event.target.value = this.barcodeSearch;
                 break;
