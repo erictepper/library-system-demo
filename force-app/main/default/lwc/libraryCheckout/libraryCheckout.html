@@ -2,7 +2,7 @@
     <lightning-card title="Checkout" icon-name="standard:product_request_line_item">
         <div class="slds-m-around_medium">
             <lightning-input label="Employee ID" value={userSearch} onchange={changeHandler} id="user"></lightning-input>
-            <lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} id="bar"></lightning-input>
+            <lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} id="bar" class="bar"></lightning-input>
             <br />
             <center>
                 <lightning-button variant="base" label="Check Out" title="Check Out" onclick={changeHandler} class="slds-m-left_x-small" id="submit"></lightning-button>
