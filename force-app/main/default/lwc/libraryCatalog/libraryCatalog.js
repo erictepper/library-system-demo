@@ -1,7 +1,7 @@
 import { LightningElement, track, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 
-import getLibraryItems from '@salesforce/apex/catalogController.getLibraryItems';
+import getLibraryItems from '@salesforce/apex/controller.getLibraryItems';
 
 export default class LibraryCatalog extends LightningElement {
     @track libraryUpdate;

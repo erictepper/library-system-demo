@@ -1,5 +1,5 @@
-public with sharing class catalogController {
-    public catalogController() {
+public with sharing class controller {
+    public controller() {
 
     }
 
