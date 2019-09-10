@@ -50,4 +50,11 @@ public with sharing class controller {
 
         return true;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static String getHighestAvailableBarcode() {
+        AggregateResult[] results = [SELECT MAX(Name) max FROM Library_Item__c WHERE Available__c = true];
+        if (results.length == 0) return '';
+        else return (String) results[0].get('max');
+    }
 }
