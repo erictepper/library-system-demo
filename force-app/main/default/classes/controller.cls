@@ -45,6 +45,9 @@ public with sharing class controller {
             update curr;
         } catch (DmlException e) {
             System.debug('An unexpected error has occurred: ' + e.getMessage());
+            return false;
         }
+
+        return true;
     }
 }
