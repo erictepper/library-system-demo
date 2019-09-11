@@ -34,7 +34,7 @@ public with sharing class controller {
     @AuraEnabled
     public static String checkout(String employeeId, String barcode) {
         // basic checks
-        if (employeeId.equals('')) return 'Please enter a username.'; // TODO: optionally move error message to lwc interface
+        if (employeeId.equals('')) return 'Please enter a username.'; // TODO: optionally move error message` to lwc interface
         if (barcode.equals('')) return 'Please enter a barcode.';
 
         // gets the library item and the user to add to Library_Checkout__c fields,
@@ -62,7 +62,7 @@ public with sharing class controller {
 
             // Update availability of the item. 
             currItem.Available__c = false;
-            update curr;
+            update currItem;
         } catch (DmlException e) {
             return 'An unexpected error has occurred: ' + e.getMessage();
         }
