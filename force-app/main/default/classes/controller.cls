@@ -22,6 +22,8 @@ public with sharing class controller {
             boolean b = statusSearch.equals('true');
             criteria.add('Available__c = :b');
         }
+
+        // fills the WHERE clause with the search criteria
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
 
         // queries the database using the search terms
