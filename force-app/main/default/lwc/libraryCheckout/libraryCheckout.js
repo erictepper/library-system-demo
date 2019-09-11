@@ -21,8 +21,9 @@ export default class LibraryCheckout extends LightningElement {
             this.barcodeSearch = data;
             this.error = undefined;
         } else if (error) {
+            console.log(error)
             this.error = error;
-            this.contacts = undefined;
+            this.barcodeSearch = 'undefined';
         }
     }
 
@@ -53,15 +54,15 @@ export default class LibraryCheckout extends LightningElement {
                            barcode: this.barcodeSearch })
                     .then(result => {
                         this.updateResult = result;
+                        // updates the barcode input field with the highest available barcode
+                        refreshApex(this.barcodeUpdate);
+                        inputField = this.template.querySelector('.bar');
+                        inputField.value = this.barcodeSearch;
+                        console.log(this.updateResult);
                     })
                     .catch(error => {
                         this.error = error;
                     });
-
-                // updates the barcode input field with the highest available barcode
-                refreshApex(this.barcodeUpdate);
-                inputField = this.template.querySelector('.bar');
-                inputField.value = 'lalalalalala'; // debug
                 break;
             default:
                 // updates the username input field with the source name for debugging, 
