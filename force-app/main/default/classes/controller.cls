@@ -3,11 +3,12 @@ public with sharing class controller {
 
     }
 
+    // gets the list of library items for the catalog, using optional search terms. 
     @AuraEnabled(cacheable=true)
     public static Library_Item__c[] getLibraryItems(String barcodeSearch, String typeSearch, String nameSearch, String statusSearch) {
+        // adds optional search terms to where clause
         String whereClause = '';
         String[] criteria = new String[]{};
-
         if (!barcodeSearch.equals('')) {
             barcodeSearch = '%' + barcodeSearch + '%';
             criteria.add('Name LIKE :barcodeSearch');
@@ -23,19 +24,24 @@ public with sharing class controller {
         }
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
 
+        // queries the database using the search terms
         return Database.query('SELECT Name, Type__c, Title__c, Available__c FROM Library_Item__c ' + whereClause + ' ORDER BY Available__c DESC, Name DESC');
     }
 
+    // checks out a Library_Item__c for the libraryCheckout lwc
     @AuraEnabled
     public static String checkout(String employeeId, String barcode) {
+        // basic checks
         if (employeeId.equals('')) return 'Please enter a username.';
         if (barcode.equals('')) return 'Please enter a barcode.';
 
+        // gets the library item and the user to add to Library_Checkout__c fields
         Library_Item__c[] results = Database.query('SELECT Id, Available__c FROM Library_Item__c WHERE Name = :barcode');
         User[] userResults = Database.query('SELECT Id FROM User WHERE Username = :employeeId');
         if (results.size() == 0) { 
             return 'Library item does not exist.';
         }
+        // checks that the library item is available for checkout
         if (!results[0].Available__c) { 
             return 'Library item is unavailable.';
         }
@@ -43,16 +49,16 @@ public with sharing class controller {
             return 'User does not exist.';
         }
 
-        Library_Item__c curr = results[0];
+        Library_Item__c currItem = results[0];
         User currUser = userResults[0];
         Library_Checkout__c record = new Library_Checkout__c(User__c = currUser.Id, 
-                                                             Library_Item__c = curr.Id, 
+                                                             Library_Item__c = currItem.Id, 
                                                              Checkout_Date__c = Datetime.now());
         try {
             insert record;
 
             // Update availability of the item. 
-            curr.Available__c = false;
+            currItem.Available__c = false;
             update curr;
         } catch (DmlException e) {
             return 'An unexpected error has occurred: ' + e.getMessage();
@@ -61,6 +67,7 @@ public with sharing class controller {
         return 'Success.';
     }
 
+    // gets the highest available barcode number for quick checkout for libraryCheckout lwc
     @AuraEnabled(cacheable=true)
     public static String getHighestAvailableBarcode() {
         AggregateResult[] results = [SELECT MAX(Name) max FROM Library_Item__c WHERE Available__c = true];
