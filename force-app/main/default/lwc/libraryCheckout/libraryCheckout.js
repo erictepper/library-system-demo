@@ -1,4 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 
 import getHighestAvailableBarcode from '@salesforce/apex/controller.getHighestAvailableBarcode';
@@ -55,6 +56,14 @@ export default class LibraryCheckout extends LightningElement {
                            barcode: this.barcodeSearch })
                     .then(result => {
                         this.updateResult = result;
+                        if (result !== 'Success.') {
+                            const evt = new ShowToastEvent({
+                                message: result,
+                                variant: 'error'
+                            });
+                            this.dispatchEvent(evt);
+                        }
+
                         // updates the barcode input field with the highest available barcode
                         refreshApex(this.barcodeUpdate);
                         inputField = this.template.querySelector('.bar');
