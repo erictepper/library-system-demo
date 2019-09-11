@@ -28,6 +28,9 @@ public with sharing class controller {
 
     @AuraEnabled
     public static String checkout(String employeeId, String barcode) {
+        if (employeeId.equals('')) return 'Please enter a username.';
+        if (barcode.equals('')) return 'Please enter a barcode.';
+
         Library_Item__c[] results = Database.query('SELECT Id, Available__c FROM Library_Item__c WHERE Name = :barcode');
         User[] userResults = Database.query('SELECT Id FROM User WHERE Username = :employeeId');
         if (results.size() == 0) { 
@@ -61,7 +64,7 @@ public with sharing class controller {
     @AuraEnabled(cacheable=true)
     public static String getHighestAvailableBarcode() {
         AggregateResult[] results = [SELECT MAX(Name) max FROM Library_Item__c WHERE Available__c = true];
-        if (results.size() == 0) return '';
+        if (String.valueOf(results[0].get('max')) == null) return '';
         else return (String) results[0].get('max');
     }
 }
