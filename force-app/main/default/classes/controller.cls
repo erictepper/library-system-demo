@@ -58,7 +58,7 @@ public with sharing class controller {
             return 'An unexpected error has occurred: ' + e.getMessage();
         }
 
-        return 'Successful.';
+        return 'Success.';
     }
 
     @AuraEnabled(cacheable=true)
