@@ -27,7 +27,7 @@ export default class LibraryCheckout extends LightningElement {
             this.error = error;
             this.barcodeSearch = '';
         } else {
-            // We need this case since data might === '', which javascript considers to be false,
+            // We need this case since data might === '', which JavaScript considers to be false,
             // so the above 'if (data)' statement will not run. 
             this.barcodeSearch = '';
         }
