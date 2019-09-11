@@ -35,7 +35,8 @@ public with sharing class controller {
         if (employeeId.equals('')) return 'Please enter a username.';
         if (barcode.equals('')) return 'Please enter a barcode.';
 
-        // gets the library item and the user to add to Library_Checkout__c fields
+        // gets the library item and the user to add to Library_Checkout__c fields,
+        // and checks that the input library item and user exist
         Library_Item__c[] results = Database.query('SELECT Id, Available__c FROM Library_Item__c WHERE Name = :barcode');
         User[] userResults = Database.query('SELECT Id FROM User WHERE Username = :employeeId');
         if (results.size() == 0) { 
