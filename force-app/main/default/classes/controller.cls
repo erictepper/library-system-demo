@@ -67,7 +67,7 @@ public with sharing class controller {
         return 'Success.';
     }
 
-    // gets the highest available barcode number for quick checkout for libraryCheckout lwc
+    // gets the highest available barcode number for rapid checkout for libraryCheckout lwc
     @AuraEnabled(cacheable=true)
     public static String getHighestAvailableBarcode() {
         AggregateResult[] results = [SELECT MAX(Name) max FROM Library_Item__c WHERE Available__c = true];
