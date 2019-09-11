@@ -25,11 +25,13 @@ export default class LibraryCheckout extends LightningElement {
             this.error = error;
             this.barcodeSearch = '';
         } else {
+            // We need this case since data might = '', which javascript considers to be false,
+            // so the above 'if (data)' statement will not run. 
             this.barcodeSearch = '';
         }
     }
 
-    // handles changes from the client
+    // handles changes from the lwc
     changeHandler(event) {
         // the barcode input field, to update it to the next highest available 
         // barcode after a library item is checked out
@@ -40,6 +42,7 @@ export default class LibraryCheckout extends LightningElement {
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
 
+        // matches the source by element id
         switch (source[1]) {
             case 'user':
                 // updates this.userSearch with the input in the Username field
