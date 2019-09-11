@@ -1,7 +1,6 @@
 // Checks that user exists, item exists and is available, checkout date is not null, and return date is null. 
 trigger IsValidCheckout on Library_Checkout__c (before insert)  {
     Library_Checkout__c[] results = Trigger.new;
-    List<Library_Item__c> updateItems = new List<Library_Item__c>();
 
     for (Integer i = 0; i < results.size(); i++) {
         Library_Checkout__c curr = results[i];
