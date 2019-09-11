@@ -6,7 +6,7 @@ public with sharing class controller {
     // gets the list of library items for the catalog, using optional search terms. 
     @AuraEnabled(cacheable=true)
     public static Library_Item__c[] getLibraryItems(String barcodeSearch, String typeSearch, String nameSearch, String statusSearch) {
-        // adds optional search terms to where clause
+        // adds each search term as an element in the search criteria array
         String whereClause = '';
         String[] criteria = new String[]{};
         if (!barcodeSearch.equals('')) {
