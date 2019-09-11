@@ -1,4 +1,4 @@
-trigger CheckoutOrReturn on Library_Item__c (after update) {
+trigger UpdateCheckoutAfterItemUpdate on Library_Item__c (after update) {
     Library_Item__c[] results = Trigger.new;
     List<Library_Checkout__c> updateCheckouts = new List<Library_Checkout__c>();
     List<Library_Checkout__c> insertCheckouts = new List<Library_Checkout__c>();
