@@ -21,9 +21,8 @@ export default class LibraryCheckout extends LightningElement {
             this.barcodeSearch = data;
             this.error = undefined;
         } else if (error) {
-            console.log(error)
             this.error = error;
-            this.barcodeSearch = 'undefined';
+            this.barcodeSearch = '';
         }
     }
 
@@ -58,7 +57,6 @@ export default class LibraryCheckout extends LightningElement {
                         refreshApex(this.barcodeUpdate);
                         inputField = this.template.querySelector('.bar');
                         inputField.value = this.barcodeSearch;
-                        console.log(this.updateResult);
                     })
                     .catch(error => {
                         this.error = error;
