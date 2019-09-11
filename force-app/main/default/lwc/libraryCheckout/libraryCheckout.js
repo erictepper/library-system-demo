@@ -11,6 +11,8 @@ export default class LibraryCheckout extends LightningElement {
     @track userSearch = "";  // the username of the employee checking out
     @track barcodeSearch = "";  // the barcode of the library item to check out
 
+    // gets the highest available barcode and sets it to the barcode input
+    // field to allow for rapid checkout
     @wire(getHighestAvailableBarcode)
     wiredBarcode(barcodeUpdate) {
         // variable to allow refreshApex(this.barcodeUpdate) to work
