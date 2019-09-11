@@ -34,7 +34,7 @@ public with sharing class controller {
     @AuraEnabled
     public static String checkout(String employeeId, String barcode) {
         // basic checks
-        if (employeeId.equals('')) return 'Please enter a username.';
+        if (employeeId.equals('')) return 'Please enter a username.'; // TODO: optionally move error message to lwc interface
         if (barcode.equals('')) return 'Please enter a barcode.';
 
         // gets the library item and the user to add to Library_Checkout__c fields,
