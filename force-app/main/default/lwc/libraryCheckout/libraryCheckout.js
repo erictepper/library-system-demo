@@ -23,6 +23,8 @@ export default class LibraryCheckout extends LightningElement {
         } else if (error) {
             this.error = error;
             this.barcodeSearch = '';
+        } else {
+            this.barcodeSearch = '';
         }
     }
 
