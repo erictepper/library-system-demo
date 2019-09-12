@@ -30,6 +30,13 @@ public with sharing class controller {
         return Database.query('SELECT Name, Type__c, Title__c, Available__c FROM Library_Item__c ' + whereClause + ' ORDER BY Available__c DESC, Name DESC');
     }
 
+    // gets the list of checkout records for the borrowing history, using optional search terms. 
+    @AuraEnabled(cacheable=true)
+    public static sObject[] getCheckoutRecords(String usernameSearch, String barcodeSearch, 
+        String typeSearch, String itemNameSearch, Datetime checkoutSearch, Datetime returnSearch) {
+        return [SELECT ]
+    }
+
     // checks out a Library_Item__c for the libraryCheckout lwc
     @AuraEnabled
     public static String checkout(String employeeId, String barcode) {
