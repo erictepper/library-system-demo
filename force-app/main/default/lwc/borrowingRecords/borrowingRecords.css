@@ -1,5 +1,5 @@
 h1 {
-    margin-top: 0.4em;
+    margin-top: 1em;
     font-size: 1.1em;
     text-align: center;
 }
@@ -8,3 +8,16 @@ h3 {
     font-size: 1.1em;
     margin-bottom: 0.4em;
 }
+
+table.search td.username { padding-right: 1%; }
+table.search td.barcode { padding-right: 1%; }
+table.search td.itemType { padding-right: 1%; }
+table.search td.itemName { padding-right: 1%; }
+table.search td.checkout { padding-right: 1%; }
+
+tr.header { font-weight:bold; }
+td.barcode { width:8%; }
+td.itemType { width:12%; }
+td.itemName { width:40%; }
+td.checkout { width: 15%; }
+td.return { width: 15%; }
