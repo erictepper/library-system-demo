@@ -19,7 +19,7 @@ trigger UpdateCheckoutAfterItemUpdate on Library_Item__c (after update) {
             }
         } 
 
-        // else if item has been checked out
+        /* // else if item has been checked out
         else {
             // checks to see if a checkout record has already been created
             ID currId = curr.Id;
@@ -35,7 +35,7 @@ trigger UpdateCheckoutAfterItemUpdate on Library_Item__c (after update) {
                     Checkout_Date__c = Datetime.now());
                 insertCheckouts.add(newCheckout);
             }
-        }
+        } */
     }
 
     update updateCheckouts;
