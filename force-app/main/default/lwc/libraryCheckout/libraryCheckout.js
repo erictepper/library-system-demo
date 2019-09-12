@@ -85,4 +85,9 @@ export default class LibraryCheckout extends LightningElement {
                 break;
         }
     }
+
+    // handles enter key input from checkout input fields
+    submitHandler(event) {
+        console.log('Test');
+    }
 }
