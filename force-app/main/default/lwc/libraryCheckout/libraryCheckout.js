@@ -71,12 +71,12 @@ export default class LibraryCheckout extends LightningElement {
         }
     }
 
+    // checks out a book if the input is valid 
     checkoutHelper() {
         // the barcode input field, to update it to the next highest available 
         // barcode after a library item is checked out
         var inputField;
 
-        // checks out a book if the input is valid 
         checkout({ employeeId: this.userSearch, 
                 barcode: this.barcodeSearch })
             .then(result => {
