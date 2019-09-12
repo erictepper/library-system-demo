@@ -35,10 +35,6 @@ export default class LibraryCheckout extends LightningElement {
 
     // handles changes from the lwc
     changeHandler(event) {
-        // the barcode input field, to update it to the next highest available 
-        // barcode after a library item is checked out
-        var inputField;
-
         // filters Salesforce's auto-id system ('elementId-##') using regular
         // expression matching to get the element id ('elementId')
         var re = new RegExp('([A-Za-z]+)-?\\d*');
@@ -57,26 +53,7 @@ export default class LibraryCheckout extends LightningElement {
                 break;
             case 'submit':
                 // checks out a book if the input is valid 
-                checkout({ employeeId: this.userSearch, 
-                           barcode: this.barcodeSearch })
-                    .then(result => {
-                        this.updateResult = result;
-                        if (result !== 'Success.') {
-                            const evt = new ShowToastEvent({
-                                message: result,
-                                variant: 'error'
-                            });
-                            this.dispatchEvent(evt);
-                        }
-
-                        // updates the barcode input field with the highest available barcode
-                        refreshApex(this.barcodeUpdate);
-                        inputField = this.template.querySelector('.bar');
-                        inputField.value = this.barcodeSearch;
-                    })
-                    .catch(error => {
-                        this.error = error;
-                    });
+                this.checkoutHelper();
                 break;
             default:
                 // updates the username input field with the source name for debugging, 
@@ -88,6 +65,37 @@ export default class LibraryCheckout extends LightningElement {
 
     // handles enter key input from checkout input fields
     submitHandler(event) {
-        console.log('Test');
+        if (event.keyCode === 13) {
+            // checks out a book if the input is valid 
+            this.checkoutHelper();
+        }
+    }
+
+    // checks out a book if the input is valid 
+    checkoutHelper() {
+        // the barcode input field, to update it to the next highest available 
+        // barcode after a library item is checked out
+        var inputField;
+
+        checkout({ employeeId: this.userSearch, 
+                barcode: this.barcodeSearch })
+            .then(result => {
+                this.updateResult = result;
+                if (result !== 'Success.') {
+                    const evt = new ShowToastEvent({
+                        message: result,
+                        variant: 'error'
+                    });
+                    this.dispatchEvent(evt);
+                }
+
+                // updates the barcode input field with the highest available barcode
+                refreshApex(this.barcodeUpdate);
+                inputField = this.template.querySelector('.bar');
+                inputField.value = this.barcodeSearch;
+            })
+            .catch(error => {
+                this.error = error;
+            });
     }
 }
