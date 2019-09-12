@@ -2,6 +2,7 @@ import { LightningElement, track, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 
 import getBorrowingUsers from '@salesforce/apex/controller.getBorrowingUsers';
+import getCheckoutRecords from '@salesforce/apex/controller.getCheckoutRecords';
 
 export default class BorrowingHistory extends LightningElement {
     // apex refresh fields
@@ -21,7 +22,7 @@ export default class BorrowingHistory extends LightningElement {
     @track returnSearch;
 
     @wire(getBorrowingUsers, {})
-    wiredLibraryItems(checkoutUpdate) {
+    wiredBorrowingUsers(checkoutUpdate) {
         this.checkoutUpdate = checkoutUpdate;
         const { error, data } = checkoutUpdate;
         if (data) {
@@ -36,6 +37,30 @@ export default class BorrowingHistory extends LightningElement {
         } else if (error) {
             this.error = error;
             this.borrowingUsers = undefined;
+        }
+    }
+
+    @wire(getCheckoutRecords, { 
+        usernameSearch: '$usernameSearch',
+        barcodeSearch: '$barcodeSearch',
+        typeSearch: '$typeSearch',
+        itemNameSearch: '$itemNameSearch',
+        checkoutSearch: '$checkoutSearch',
+        returnSearch: '$returnSearch'
+    })
+    wiredCheckoutRecords(recordsUpdate) {
+        this.recordsUpdate = recordsUpdate;
+        const { error, data } = recordsUpdate;
+        if (data) {
+            if (data.length !== 0) {
+                this.checkoutRecords = data;
+            } else {
+                this.checkoutRecords = undefined;
+            }
+            this.error = undefined;
+        } else if (error) {
+            this.error = error;
+            this.checkoutRecords = undefined;
         }
     }
 
