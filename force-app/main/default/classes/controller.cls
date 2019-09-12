@@ -73,4 +73,12 @@ public with sharing class controller {
         if (String.valueOf(results[0].get('max')) == null) return '';
         else return (String) results[0].get('max');
     }
+
+    // gets the list of users who currently have items checked out
+    @AuraEnabled(cacheable=true)
+    public static User[] getBorrowingUsers() {
+        return [SELECT Id, FirstName, LastName, Username
+                FROM User
+                WHERE Id IN (SELECT User__c FROM Library_Checkout__c WHERE Return_Date__c = null)];
+    }
 }
