@@ -14,7 +14,7 @@ trigger IsValidCheckout on Library_Checkout__c (before insert)  {
         if (itemResults.size() == 0) curr.addError('Library item does not exist!');
 
         // Checks if the current item can be checked out
-        // else if (!itemResults[0].Available__c) curr.addError('Library item is unavailable for checkout.');
+        else if (!itemResults[0].Available__c) curr.addError('Library item is unavailable for checkout.');
 
         // Checks dates
         if (String.valueOf(curr.Checkout_Date__c) == null) curr.addError('Must add a checkout date!');
