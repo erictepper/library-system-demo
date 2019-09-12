@@ -2,6 +2,21 @@
 ## General Info
 System that can track books and AV equipment that employees borrow from a library. Implemented on the Salesforce platform. 
 
+## Version Info
+**Version 0.1:** A scratch org with two custom objects (Library_Item__c and Library_Checkout__c), with a searchable, browsable LWC to display the Library_Item__c records. 
+
+**Version 0.2:** Added functionality for checking out Library_Item__cs and updating corresponding records in Library_Checkout__c. 
+
+**Version 0.3:** Added triggers to 
+1. Validate checkouts, 
+2. Automatically update item availabilities upon checkout/return
+3. Mark checkouts as returned when an item is marked as available
+
+**Version 0.4:** Checkout LWC now supports checking out using the enter key, whereas before you had to press the submit button. 
+
+## To-do
+* Update item trigger to only run if Available__c field has changed, rather than always running
+
 ## Demo Information
 ### 1. Library System
 ConForceSo Corporation wants to create a system to track books and AV equipment that employees can borrow from a library. Design and implement a system on the Salesforce platform to meet the requirements detailed below.
