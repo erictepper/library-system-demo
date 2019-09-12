@@ -5,7 +5,7 @@ System that can track books and AV equipment that employees borrow from a librar
 ## Version Info
 **Version 0.1:** A scratch org with two custom objects (Library_Item__c and Library_Checkout__c), with a searchable, browsable LWC to display the Library_Item__c records. 
 
-**Version 0.2:** Added functionality for checking out Library_Item__cs and updating corresponding records in Library_Checkout__c. 
+**Version 0.2:** Added functionality for checking out Library_Item__cs and creating corresponding records in Library_Checkout__c. 
 
 **Version 0.3:** Added triggers to 
 * validate checkouts
