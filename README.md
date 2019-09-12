@@ -12,7 +12,7 @@ System that can track books and AV equipment that employees borrow from a librar
 * automatically update item availabilities upon checkout/return
 * mark checkouts as returned when an item is marked as available
 
-**Version 0.4:** Checkout LWC now supports checking out using the enter key, whereas before you had to press the submit button. 
+**Version 0.4:** Added functionality for checking out using the enter key, in addition to checking out using the 'Check Out' button. 
 
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running.
