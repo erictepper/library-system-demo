@@ -12,8 +12,8 @@
             "c/libraryCheckout": [
                 "libraryCheckout/libraryCheckout.js"
             ],
-            "c/borrowingHistory": [
-                "borrowingHistory/borrowingHistory.js"
+            "c/borrowingRecords": [
+                "borrowingRecords/borrowingRecords.js"
             ]
         }
     },

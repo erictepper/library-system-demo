@@ -1,0 +1,31 @@
+<template>
+        <lightning-card title="Borrowing Records" icon-name="standard:catalog">
+            <div class="slds-m-around_medium">
+                <h1>Users with items currently checked out:</h1>
+                <br />
+                <table id="catalog">
+                    <tr class="header">
+                        <td class="barcode">Barcode</td>
+                        <td class="type">Type</td>
+                        <td class="name">Name</td>
+                        <td class="status">Status</td>
+                    </tr>
+                    <template if:true={libraryItems}>
+                        <template for:each={libraryItems} for:item="item">
+                            <tr key={item.Id}>
+                                <td class="barcode">{item.Name}</td>
+                                <td class="type">{item.Type__c}</td>
+                                <td class="name">{item.Title__c}</td>
+                                <template if:true={item.Available__c}>
+                                    <td class="status"><span class="available">Available</span></td>
+                                </template>
+                                <template if:false={item.Available__c}>
+                                    <td class="status"><span class="unavailable">Unavailable</span></td>
+                                </template>
+                            </tr>
+                        </template>
+                    </template>
+                </table>
+            </div>
+        </lightning-card>
+    </template>
