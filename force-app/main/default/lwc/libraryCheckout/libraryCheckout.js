@@ -80,19 +80,19 @@ export default class LibraryCheckout extends LightningElement {
         checkout({ employeeId: this.userSearch, 
                 barcode: this.barcodeSearch })
             .then(result => {
-            this.updateResult = result;
-            if (result !== 'Success.') {
-                const evt = new ShowToastEvent({
-                    message: result,
-                    variant: 'error'
-                });
-                this.dispatchEvent(evt);
-            }
+                this.updateResult = result;
+                if (result !== 'Success.') {
+                    const evt = new ShowToastEvent({
+                        message: result,
+                        variant: 'error'
+                    });
+                    this.dispatchEvent(evt);
+                }
 
-            // updates the barcode input field with the highest available barcode
-            refreshApex(this.barcodeUpdate);
-            inputField = this.template.querySelector('.bar');
-            inputField.value = this.barcodeSearch;
+                // updates the barcode input field with the highest available barcode
+                refreshApex(this.barcodeUpdate);
+                inputField = this.template.querySelector('.bar');
+                inputField.value = this.barcodeSearch;
             })
             .catch(error => {
                 this.error = error;
