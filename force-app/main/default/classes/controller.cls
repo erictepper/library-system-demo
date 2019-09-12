@@ -59,10 +59,6 @@ public with sharing class controller {
                                                              Checkout_Date__c = Datetime.now());
         try {
             insert record;
-
-            // Update availability of the item. 
-            currItem.Available__c = false;
-            update currItem;
         } catch (DmlException e) {
             return 'An unexpected error has occurred: ' + e.getMessage();
         }
