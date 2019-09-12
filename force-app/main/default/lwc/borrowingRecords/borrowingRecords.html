@@ -1,12 +1,14 @@
 <template>
         <lightning-card title="Borrowing Records" icon-name="standard:catalog">
             <div class="slds-m-around_medium">
-                <h1>Users with items currently checked out:</h1>
-                <ul>
-                    <template for:each={borrowingUsers} for:item="user">
-                        <li key={user.Id}>{user.FirstName} {user.LastName} ({user.Username})</li>
-                    </template>
-                </ul>
+                <template if:true={borrowingUsers}>
+                    <h1>Users with items currently checked out:</h1>
+                    <ul>
+                        <template for:each={borrowingUsers} for:item="user">
+                            <li key={user.Id}>{user.FirstName} {user.LastName} ({user.Username})</li>
+                        </template>
+                    </ul>
+                </template>
             </div>
         </lightning-card>
     </template>
