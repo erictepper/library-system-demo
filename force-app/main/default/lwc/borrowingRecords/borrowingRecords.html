@@ -8,8 +8,9 @@
                             <li key={user.Id}>&ensp;•&ensp;{user.FirstName} {user.LastName} ({user.Username})</li>
                         </template>
                     </ul>
+                    <hr>
                 </template>
-                <h1>———————— Borrowing History ————————</h1>
+                <h1>Borrowing History</h1>
                 <table class="search">
                     <tr>
                         <td class="username"><lightning-input label="Username" value={usernameSearch} onchange={changeHandler} id="username"></lightning-input></td>
@@ -30,8 +31,15 @@
                         <td class="checkout">Checkout</td>
                         <td class="return">Return</td>
                     </tr>
-                    <template for:each={libraryItems} for:item="item">
-                            <tr key={item.Id}></tr>
+                    <template for:each={checkoutRecords} for:item="record">
+                            <tr key={record.Id}>
+                                <td class="username">{record.User__c.Username}</td>
+                                <td class="barcode">{record.Library_Item__c.Name}</td>
+                                <td class="itemType">{record.Library_Item__c.Type__c}</td>
+                                <td class="itemName">{record.Library_Item__c.Title__c}</td>
+                                <td class="checkout">{record.Checkout_Date__c}</td>
+                                <td class="return">{record.Return_date__c}</td>
+                            </tr>
                     </template>
                 </table>
             </div>
