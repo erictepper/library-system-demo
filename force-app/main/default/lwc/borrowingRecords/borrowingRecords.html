@@ -2,12 +2,24 @@
         <lightning-card title="Borrowing Records" icon-name="standard:record_lookup">
             <div class="slds-m-around_medium">
                 <template if:true={borrowingUsers}>
-                    <h1>Users with items currently checked out:</h1>
+                    <h3>The following users have items checked out:</h3>
                     <ul>
                         <template for:each={borrowingUsers} for:item="user">
-                            <li key={user.Id}>{user.FirstName} {user.LastName} ({user.Username})</li>
+                            <li key={user.Id}>&ensp;•&ensp;{user.FirstName} {user.LastName} ({user.Username})</li>
                         </template>
                     </ul>
+                </template>
+                <h1>———————— Borrowing History ————————</h1>
+                <table class="search">
+                    <tr>
+                        <td class="username"><lightning-input label="Username" value={usernameSearch} onchange={changeHandler} id="username"></lightning-input></td>
+                        <td class="barcode"><lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} id="bar"></lightning-input></td>
+                        <td class="itemName"><lightning-input label="Item Name" value={itemNameSearch} onchange={changeHandler} id="itemname"></lightning-input></td>
+                        <td class="itemType"><lightning-combobox label="Item Type" value={typeSearch} placeholder="All" options={typeOptions} onchange={changeHandler} id="type"></lightning-combobox></td>
+                    </tr>
+                </table>
+                <template if:true={borrowingHistory}>
+                    username, barcode, book title
                 </template>
             </div>
         </lightning-card>
