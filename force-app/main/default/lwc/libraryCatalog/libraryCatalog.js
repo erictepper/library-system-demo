@@ -92,7 +92,7 @@ export default class LibraryCatalog extends LightningElement {
                     if (event.target.value.match(digitMatcher)) { 
                         const num = parseInt(event.target.value, 10);
                         if (num === 0) {
-                            event.target.value = 1;
+                            event.target.value = '1';
                             this.currPage = 1;
                         }
                         else if (num < this.totalPages) {
