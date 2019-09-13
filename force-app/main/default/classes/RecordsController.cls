@@ -24,10 +24,12 @@ public with sharing class RecordsController {
             criteria.add('Library_Item__r.Title__c LIKE :itemNameSearch');
         }
         if (!checkoutSearch.equals('')) {
+            checkoutSearch = parseDateString(checkoutSearch);
             Datetime checkoutDate = Datetime.parse(checkoutSearch);
             criteria.add('Checkout_Date__c < :checkoutDate');
         }
         if (!returnSearch.equals('')) {
+            returnSearch = parseDateString(returnSearch);
             DateTime returnDate = Datetime.parse(returnSearch);
             criteria.add('Return_Date__c < :returnDate');
         }
@@ -61,10 +63,12 @@ public with sharing class RecordsController {
             criteria.add('Library_Item__r.Title__c LIKE :itemNameSearch');
         }
         if (!checkoutSearch.equals('')) {
+            checkoutSearch = parseDateString(checkoutSearch);
             Datetime checkoutDate = Datetime.parse(checkoutSearch);
             criteria.add('Checkout_Date__c < :checkoutDate');
         }
         if (!returnSearch.equals('')) {
+            returnSearch = parseDateString(returnSearch);
             DateTime returnDate = Datetime.parse(returnSearch);
             criteria.add('Return_Date__c < :returnDate');
         }
@@ -88,5 +92,58 @@ public with sharing class RecordsController {
         return [SELECT Id, FirstName, LastName, Username
                 FROM User
                 WHERE Id IN (SELECT User__c FROM Library_Checkout__c WHERE Return_Date__c = null)];
+    }
+
+    private static String parseDateString(String inputDate) {
+        // Date matcher
+        Pattern datePattern = Pattern.compile('(\\d{4})(?:-(\\d{1,2}))?(?:-(\\d{1,2}))?(?: (\\d{1,2})(?::(\\d{1,2}))?(?::(\\d{1,2}))?)?');
+        Matcher dateMatches = datePattern.matcher(inputDate);
+
+        // if no year
+        if (!dateMatches.matches()) return inputDate; 
+        // if no month
+        else if (dateMatches.group(2) == null) return '01/01/' + dateMatches.group(1) + ' 12:00 AM';
+        // if no day
+        else if (dateMatches.group(3) == null) {
+            return dateMatches.group(2) + '/01/' + dateMatches.group(1) + ' 12:00 AM';
+        }
+        // if no hour
+        else if (dateMatches.group(4) == null) {
+            return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                ' 12:00 AM';
+        }
+        // if no minute
+        else if (dateMatches.group(5) == null) {
+            if (Integer.valueOf(dateMatches.group(4)) < 1) {
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' 12:00 AM';
+            } else if (Integer.valueOf(dateMatches.group(4)) < 12) {
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' ' + dateMatches.group(4) + ':00 AM';
+            } else if (Integer.valueOf(dateMatches.group(4)) < 13) {
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' 12:00 PM';
+            } else {
+                String hour = String.valueOf(Integer.valueOf(dateMatches.group(4)) - 12);
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' ' + hour + ':00 PM';
+            }
+        }
+        else {
+            if (Integer.valueOf(dateMatches.group(4)) < 1) {
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' 12:' + dateMatches.group(5) + ' AM';
+            } else if (Integer.valueOf(dateMatches.group(4)) < 12) {
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' ' + dateMatches.group(4) + ':' + dateMatches.group(5) + ' AM';
+            } else if (Integer.valueOf(dateMatches.group(4)) < 13) {
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' 12:' + dateMatches.group(5) + ' PM';
+            } else {
+                String hour = String.valueOf(Integer.valueOf(dateMatches.group(4)) - 12);
+                return dateMatches.group(2) + '/' + dateMatches.group(3) + '/' + dateMatches.group(1) + 
+                    ' ' + hour + ':' + dateMatches.group(5) + ' PM';
+            }
+        }
     }
 }
