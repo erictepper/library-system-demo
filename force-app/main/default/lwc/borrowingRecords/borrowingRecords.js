@@ -74,7 +74,8 @@ export default class BorrowingHistory extends LightningElement {
         typeSearch: '$typeSearch',
         itemNameSearch: '$itemNameSearch',
         checkoutSearch: '$checkoutSearch',
-        returnSearch: '$returnSearch'
+        returnSearch: '$returnSearch',
+        pageNumber: '$currPage'
     })
     wiredCheckoutRecords(recordsUpdate) {
         this.recordsUpdate = recordsUpdate;
