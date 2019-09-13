@@ -128,4 +128,11 @@ export default class BorrowingHistory extends LightningElement {
         }
         return refreshApex(this.recordsUpdate);
     }
+
+    // Resets page number when search terms are updated.
+    resetPageNumber() {
+        var inputField = this.template.querySelector('.pnum');
+        inputField.value = '1';
+        this.currPage = 1;
+    }
 }
