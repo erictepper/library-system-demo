@@ -35,7 +35,7 @@ public with sharing class RecordsController {
     // gets the list of checkout records for the borrowing history, using optional search terms. 
     @AuraEnabled(cacheable=true)
     public static Library_Checkout__c[] getCheckoutRecords(String usernameSearch, String barcodeSearch, 
-        String typeSearch, String itemNameSearch, String checkoutSearch, String returnSearch) {
+        String typeSearch, String itemNameSearch, String checkoutSearch, String returnSearch, Integer pageNumber) {
         // adds each search term as an element in the search criteria array
         String whereClause = '';
         String[] criteria = new String[]{};
@@ -56,11 +56,14 @@ public with sharing class RecordsController {
         // fills the WHERE clause with the search criteria
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
 
+        Integer offset = (pageNumber - 1) * 15;
+
         return Database.query('SELECT User__r.Username, Library_Item__r.Name, Library_Item__r.Type__c, ' +
                                       'Library_Item__r.Title__c, FORMAT(Checkout_Date__c) Checkout_Date, ' +
                                       'FORMAT(Return_Date__c) Return_Date ' +
                               'FROM Library_Checkout__c ' + whereClause + ' ' + 
-                              'ORDER BY Return_Date__c, Checkout_Date__c, Library_Item__r.Name');
+                              'ORDER BY Return_Date__c, Checkout_Date__c, Library_Item__r.Name ' + 
+                              'LIMIT 15 OFFSET :offset');
     }
 
     // gets the list of users who currently have items checked out
