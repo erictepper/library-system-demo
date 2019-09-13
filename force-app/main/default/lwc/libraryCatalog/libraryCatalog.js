@@ -10,6 +10,8 @@ export default class LibraryCatalog extends LightningElement {
     @track typeSearch = "";
     @track nameSearch = "";
     @track statusSearch = "";
+    @track currPage = '';
+    @track totalPages = '';
 
     @wire(getLibraryItems, { 
         barcodeSearch: '$barcodeSearch',
@@ -46,6 +48,7 @@ export default class LibraryCatalog extends LightningElement {
     }
 
     changeHandler(event) {
+        var digitMatcher;
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
         switch (source[1]) {
@@ -60,6 +63,18 @@ export default class LibraryCatalog extends LightningElement {
                 break;
             case 'status':
                 this.statusSearch = event.detail.value;
+                break;
+            case 'pnum':
+                if (event.target.value) {
+                    digitMatcher = new RegExp('^\\d+$');
+                    if (event.target.value.match(digitMatcher)) { 
+                        this.currPage = event.target.value;
+                    } else {
+                        event.target.value = this.currPage;
+                    }
+                } else {
+                    this.currPage = '';
+                }
                 break;
             default:
                 this.nameSearch = source[1];
