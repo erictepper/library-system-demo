@@ -8,9 +8,16 @@ h3 {
     margin-bottom: 0.4em;
 }
 
-table { table-layout: fixed }
-td {
+table.history { table-layout: fixed; }
+table.history td {
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+table.pageSelect { table-layout: fixed; }
+table.pageSelect td {
+    overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
