@@ -7,11 +7,13 @@ import getTotalPages from '@salesforce/apex/CatalogController.getTotalPages';
 export default class LibraryCatalog extends LightningElement {
     @track libraryUpdate;
     @track libraryItems;
+    @track totalPagesWire;
     @track barcodeSearch = "";
     @track typeSearch = "";
     @track nameSearch = "";
     @track statusSearch = "";
     @track currPage = '';
+    @track totalPages;
 
     @wire(getTotalPages, { 
         barcodeSearch: '$barcodeSearch',
@@ -19,7 +21,20 @@ export default class LibraryCatalog extends LightningElement {
         nameSearch: '$nameSearch',
         statusSearch: '$statusSearch'
     })
-    totalPages;
+    wiredTotalPages(totalPagesWire) {
+        console.log(totalPagesWire);
+        this.totalPagesWire = totalPagesWire;
+        const { error, data } = totalPagesWire;
+        if (data) {
+            this.totalPages = data.toString();
+            this.error = undefined;
+        } else if (error) {
+            this.error = error;
+            this.totalPages = '1';
+        } else {
+            this.totalPages = '1';
+        }
+    }
 
     @wire(getLibraryItems, { 
         barcodeSearch: '$barcodeSearch',
