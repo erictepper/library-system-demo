@@ -9,8 +9,8 @@
                         </template>
                     </ul>
                     <hr>
+                    <h1>Borrowing History</h1>
                 </template>
-                <h1>Borrowing History</h1>
                 <table class="search">
                     <tr>
                         <td class="username"><lightning-input label="Username" value={usernameSearch} onchange={changeHandler} id="username"></lightning-input></td>
@@ -22,7 +22,7 @@
                     </tr>
                 </table>
                 <br />
-                <table id="history">
+                <table class="history">
                     <tr class="header">
                         <td class="username">Username</td>
                         <td class="barcode">Barcode</td>
@@ -42,6 +42,15 @@
                         </tr>
                     </template>
                 </table>
+                <br />
+                <center><table class="pageSelect"><tr>
+                    <td class="pageInput">
+                        <input type="text" value={currPage} onkeyup={changeHandler} id="pnum" maxlength="4" size="4" class="pnum"></input>
+                    </td>
+                    <td class="totalPages">
+                        / {totalPages}
+                    </td>
+                </tr></table></center>
             </div>
         </lightning-card>
     </template>

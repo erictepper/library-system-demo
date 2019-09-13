@@ -10,29 +10,36 @@
                 </tr>
             </table>
             <br />
-            <table id="catalog">
+            <table class="catalog">
                 <tr class="header">
                     <td class="barcode">Barcode</td>
                     <td class="type">Type</td>
                     <td class="name">Name</td>
                     <td class="status">Status</td>
                 </tr>
-                <template if:true={libraryItems}>
-                    <template for:each={libraryItems} for:item="item">
-                        <tr key={item.Id}>
-                            <td class="barcode">{item.Name}</td>
-                            <td class="type">{item.Type__c}</td>
-                            <td class="name">{item.Title__c}</td>
-                            <template if:true={item.Available__c}>
-                                <td class="status"><span class="available">Available</span></td>
-                            </template>
-                            <template if:false={item.Available__c}>
-                                <td class="status"><span class="unavailable">Unavailable</span></td>
-                            </template>
-                        </tr>
-                    </template>
+                <template for:each={libraryItems} for:item="item">
+                    <tr key={item.Id}>
+                        <td class="barcode">{item.Name}</td>
+                        <td class="type">{item.Type__c}</td>
+                        <td class="name">{item.Title__c}</td>
+                        <template if:true={item.Available__c}>
+                            <td class="status"><span class="available">Available</span></td>
+                        </template>
+                        <template if:false={item.Available__c}>
+                            <td class="status"><span class="unavailable">Unavailable</span></td>
+                        </template>
+                    </tr>
                 </template>
             </table>
+            <br />
+            <center><table class="pageSelect"><tr>
+                <td class="pageInput">
+                    <input type="text" value={currPage} onkeyup={changeHandler} id="pnum" maxlength="4" size="4" class="pnum"></input>
+                </td>
+                <td class="totalPages">
+                    / {totalPages}
+                </td>
+            </tr></table></center>
         </div>
     </lightning-card>
 </template>

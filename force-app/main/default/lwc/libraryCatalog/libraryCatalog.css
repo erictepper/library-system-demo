@@ -1,12 +1,30 @@
-table.search td.barcode { padding-right:1%; }
-table.search td.type { padding-right:1%; }
-table.search td.name { padding-right:1%; }
+table.catalog { table-layout: fixed; }
+table.catalog td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-tr.header { font-weight:bold; }
-td.barcode { width:8%; }
-td.type { width:12%; }
-td.name { width:70%; }
-td.status { width:10%; }
+table.pageSelect { table-layout: fixed; }
+table.pageSelect td {
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-span.available { color:green; }
-span.unavailable { color:red; }
+table.search td.barcode { padding-right: 1%; }
+table.search td.type { padding-right: 1%; }
+table.search td.name { padding-right: 1%; }
+
+tr.header { font-weight: bold; }
+td.barcode { width: 8%; }
+td.type { width: 12%; }
+td.name { width: 70%; }
+td.status { width: 10%; }
+
+span.available { color: green; }
+span.unavailable { color: red; }
+
+.pageSelect { width: 10%; }
+
+input { text-align: center; }
