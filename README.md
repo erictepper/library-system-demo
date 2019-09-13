@@ -22,7 +22,6 @@ System that can track books and AV equipment that employees borrow from a librar
 
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running.
-* Fix bug where locale prevents proper date comparison. 
 
 ## Demo Information
 ### 1. Library System
