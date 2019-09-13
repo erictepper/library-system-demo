@@ -12,8 +12,8 @@ export default class LibraryCatalog extends LightningElement {
     @track typeSearch = "";
     @track nameSearch = "";
     @track statusSearch = "";
-    @track currPage = '';
-    @track totalPages;
+    @track currPage = '1';
+    @track totalPages = '';
 
     @wire(getTotalPages, { 
         barcodeSearch: '$barcodeSearch',
@@ -96,10 +96,10 @@ export default class LibraryCatalog extends LightningElement {
                             this.currPage = 1;
                         }
                         else if (num < this.totalPages) {
-                            this.currPage = event.target.value;
+                            this.currPage = parseInt(event.target.value, 10);
                         } else {
                             event.target.value = this.totalPages;
-                            this.currPage = this.totalPages;
+                            this.currPage = parseInt(this.totalPages, 10);
                         }
                     } else {
                         event.target.value = this.currPage;
