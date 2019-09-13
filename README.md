@@ -1,5 +1,7 @@
 # library-system-demo
 ## General Info
+Version 0.5.0
+
 System that can track books and AV equipment that employees borrow from a library. Implemented on the Salesforce platform. 
 
 ## Version Info
@@ -14,9 +16,11 @@ System that can track books and AV equipment that employees borrow from a librar
 
 **Version 0.4:** Added functionality for checking out using the enter key, in addition to checking out using the 'Check Out' button. 
 
+**Version 0.5:** Added functionality for tracking checkout information, including which users currently have items checked out as well as the borrowing history for each item. 
+
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running.
-* Add a paginator to catalog. 
+* Add a paginator to catalog and checkout records. 
 
 ## Demo Information
 ### 1. Library System

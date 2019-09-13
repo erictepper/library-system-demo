@@ -3,6 +3,9 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/borrowingRecords": [
+                "borrowingRecords/borrowingRecords.js"
+            ],
             "c/helloWorld": [
                 "helloWorld/helloWorld.js"
             ],

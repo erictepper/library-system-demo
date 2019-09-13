@@ -1,0 +1,24 @@
+h1 {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.1em;
+    margin-bottom: 0.4em;
+}
+
+table { table-layout: fixed }
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+tr.header { font-weight:bold; }
+td.username { width: 10%; padding-right: 1%; }
+td.barcode { width: 8%; padding-right: 1%; }
+td.itemType { width: 12%; padding-right: 1%; }
+td.itemName { width: 40%; padding-right: 1%; }
+td.checkout { width: 15%; padding-right: 1%; }
+td.return { width: 15%; }
