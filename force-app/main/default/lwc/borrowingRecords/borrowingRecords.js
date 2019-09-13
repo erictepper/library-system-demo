@@ -102,6 +102,7 @@ export default class BorrowingHistory extends LightningElement {
     }
 
     changeHandler(event) {
+        var digitMatcher;
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
         switch (source[1]) {
@@ -128,6 +129,26 @@ export default class BorrowingHistory extends LightningElement {
             case 'return':
                 this.returnSearch = event.target.value;
                 this.resetPageNumber();
+                break;
+            case 'pnum':
+                if (event.target.value) {
+                    digitMatcher = new RegExp('^\\d+$');
+                    if (event.target.value.match(digitMatcher)) { 
+                        const num = parseInt(event.target.value, 10);
+                        if (num === 0) {
+                            event.target.value = '1';
+                            this.currPage = 1;
+                        }
+                        else if (num < this.totalPages) {
+                            this.currPage = parseInt(event.target.value, 10);
+                        } else {
+                            event.target.value = this.totalPages;
+                            this.currPage = parseInt(this.totalPages, 10);
+                        }
+                    } else {
+                        event.target.value = this.currPage.toString();
+                    }
+                }
                 break;
             default:
                 this.nameSearch = source[1];
