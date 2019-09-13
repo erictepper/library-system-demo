@@ -1,5 +1,5 @@
-table.history { table-layout: fixed; }
-table.history td {
+table.catalog { table-layout: fixed; }
+table.catalog td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
