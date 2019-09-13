@@ -22,3 +22,7 @@ td.itemType { width: 12%; padding-right: 1%; }
 td.itemName { width: 36%; padding-right: 1%; }
 td.checkout { width: 17%; padding-right: 1%; }
 td.return { width: 17%; }
+
+.pageSelect { width: 10%; }
+
+input { text-align: center; }
