@@ -106,21 +106,27 @@ export default class BorrowingHistory extends LightningElement {
         switch (source[1]) {
             case 'username':
                 this.usernameSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             case 'bar':
                 this.barcodeSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             case 'type':
                 this.typeSearch = event.detail.value;
+                this.resetPageNumber();
                 break;
             case 'itemname':
                 this.itemNameSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             case 'checkout':
                 this.checkoutSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             case 'return':
                 this.returnSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             default:
                 this.nameSearch = source[1];
