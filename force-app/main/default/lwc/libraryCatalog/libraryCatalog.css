@@ -11,8 +11,6 @@ td.status { width: 10%; }
 span.available { color: green; }
 span.unavailable { color: red; }
 
-.pageSelect {
-    width: 10%; 
-}
+.pageSelect { width: 5%; }
 
 input { text-align: center; }
