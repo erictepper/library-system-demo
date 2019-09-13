@@ -72,8 +72,6 @@ export default class LibraryCatalog extends LightningElement {
                     } else {
                         event.target.value = this.currPage;
                     }
-                } else {
-                    this.currPage = '';
                 }
                 break;
             default:
