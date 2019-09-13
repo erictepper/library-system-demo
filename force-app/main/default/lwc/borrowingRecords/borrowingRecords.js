@@ -3,11 +3,13 @@ import { refreshApex } from '@salesforce/apex';
 
 import getBorrowingUsers from '@salesforce/apex/RecordsController.getBorrowingUsers';
 import getCheckoutRecords from '@salesforce/apex/RecordsController.getCheckoutRecords';
+import getTotalPages from '@salesforce/apex/RecordsController.getTotalPages';
 
 export default class BorrowingHistory extends LightningElement {
     // apex refresh fields
     @track checkoutUpdate;
     @track recordsUpdate;
+    @track totalPagesWire;
 
     // wire result lists
     @track borrowingUsers;
@@ -20,6 +22,10 @@ export default class BorrowingHistory extends LightningElement {
     @track itemNameSearch = "";
     @track checkoutSearch = "";
     @track returnSearch = "";
+
+    // page selector fields
+    @track currPage = 1;
+    @track totalPages = '';
 
     @wire(getBorrowingUsers, {})
     wiredBorrowingUsers(checkoutUpdate) {
@@ -37,6 +43,28 @@ export default class BorrowingHistory extends LightningElement {
         } else if (error) {
             this.error = error;
             this.borrowingUsers = undefined;
+        }
+    }
+
+    @wire(getTotalPages, { 
+        usernameSearch: '$usernameSearch',
+        barcodeSearch: '$barcodeSearch',
+        typeSearch: '$typeSearch',
+        itemNameSearch: '$itemNameSearch',
+        checkoutSearch: '$checkoutSearch',
+        returnSearch: '$returnSearch'
+    })
+    wiredTotalPages(totalPagesWire) {
+        this.totalPagesWire = totalPagesWire;
+        const { error, data } = totalPagesWire;
+        if (data) {
+            this.totalPages = data.toString();
+            this.error = undefined;
+        } else if (error) {
+            this.error = error;
+            this.totalPages = '1';
+        } else {
+            this.totalPages = '1';
         }
     }
 
