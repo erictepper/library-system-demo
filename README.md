@@ -20,7 +20,7 @@ System that can track books and AV equipment that employees borrow from a librar
 
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running.
-* Add a paginator to catalog. 
+* Add a paginator to catalog and checkout records. 
 
 ## Demo Information
 ### 1. Library System
