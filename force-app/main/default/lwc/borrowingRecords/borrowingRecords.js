@@ -18,8 +18,8 @@ export default class BorrowingHistory extends LightningElement {
     @track barcodeSearch = "";
     @track typeSearch = "";
     @track itemNameSearch = "";
-    @track checkoutSearch;
-    @track returnSearch;
+    @track checkoutSearch = "";
+    @track returnSearch = "";
 
     @wire(getBorrowingUsers, {})
     wiredBorrowingUsers(checkoutUpdate) {
@@ -76,6 +76,24 @@ export default class BorrowingHistory extends LightningElement {
         var re = new RegExp('([A-Za-z]+)-?\\d*');
         var source = event.target.id.match(re);
         switch (source[1]) {
+            case 'username':
+                this.usernameSearch = event.target.value;
+                break;
+            case 'bar':
+                this.barcodeSearch = event.target.value;
+                break;
+            case 'type':
+                this.typeSearch = event.detail.value;
+                break;
+            case 'itemname':
+                this.itemNameSearch = event.target.value;
+                break;
+            case 'checkout':
+                this.checkoutSearch = event.target.value;
+                break;
+            case 'return':
+                this.returnSearch = event.target.value;
+                break;
             default:
                 this.nameSearch = source[1];
                 break;
