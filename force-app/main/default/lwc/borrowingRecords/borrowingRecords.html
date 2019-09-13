@@ -33,12 +33,12 @@
                     </tr>
                     <template for:each={checkoutRecords} for:item="record">
                         <tr key={record.Id}>
-                            <td class="username">{record.User__c.Username}</td>
-                            <td class="barcode">{record.Library_Item__c.Name}</td>
-                            <td class="itemType">{record.Library_Item__c.Type__c}</td>
-                            <td class="itemName">{record.Library_Item__c.Title__c}</td>
-                            <td class="checkout">{record.Checkout_Date__c}</td>
-                            <td class="return">{record.Return_date__c}</td>
+                            <td class="username">{record.User__r.Username}</td>
+                            <td class="barcode">{record.Library_Item__r.Name}</td>
+                            <td class="itemType">{record.Library_Item__r.Type__c}</td>
+                            <td class="itemName">{record.Library_Item__r.Title__c}</td>
+                            <td class="checkout">{record.Checkout_Date}</td>
+                            <td class="return">{record.Return_Date}</td>
                         </tr>
                     </template>
                 </table>
