@@ -102,7 +102,7 @@ export default class LibraryCatalog extends LightningElement {
                             this.currPage = parseInt(this.totalPages, 10);
                         }
                     } else {
-                        event.target.value = this.currPage;
+                        event.target.value = this.currPage.toString();
                     }
                 }
                 break;
