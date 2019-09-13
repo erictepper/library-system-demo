@@ -1,3 +1,17 @@
+table.history { table-layout: fixed; }
+table.history td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+table.pageSelect { table-layout: fixed; }
+table.pageSelect td {
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 table.search td.barcode { padding-right: 1%; }
 table.search td.type { padding-right: 1%; }
 table.search td.name { padding-right: 1%; }
