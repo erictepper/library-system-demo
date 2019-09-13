@@ -62,7 +62,7 @@ public with sharing class RecordsController {
                                       'Library_Item__r.Title__c, FORMAT(Checkout_Date__c) Checkout_Date, ' +
                                       'FORMAT(Return_Date__c) Return_Date ' +
                               'FROM Library_Checkout__c ' + whereClause + ' ' + 
-                              'ORDER BY Return_Date__c, Checkout_Date__c, Library_Item__r.Name ' + 
+                              'ORDER BY Return_Date__c DESC, Checkout_Date__c DESC, Library_Item__r.Name ' + 
                               'LIMIT 15 OFFSET :offset');
     }
 
