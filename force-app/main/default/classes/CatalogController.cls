@@ -34,7 +34,7 @@ public with sharing class CatalogController {
 
     // gets the list of library items for the catalog, using optional search terms. 
     @AuraEnabled(cacheable=true)
-    public static Library_Item__c[] getLibraryItems(String barcodeSearch, String typeSearch, String nameSearch, String statusSearch) {
+    public static Library_Item__c[] getLibraryItems(String barcodeSearch, String typeSearch, String nameSearch, String statusSearch, Integer pageNumber) {
         // adds each search term as an element in the search criteria array
         String whereClause = '';
         String[] criteria = new String[]{};
@@ -55,8 +55,10 @@ public with sharing class CatalogController {
         // fills the WHERE clause with the search criteria
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
 
+        Integer offset = (pageNumber - 1) * 15;
+
         // queries the database using the search terms
         return Database.query('SELECT Name, Type__c, Title__c, Available__c FROM Library_Item__c ' + 
-            whereClause + ' ORDER BY Available__c DESC, Name DESC');
+            whereClause + ' ORDER BY Available__c DESC, Name DESC LIMIT 15 OFFSET :offset');
     }
 }
