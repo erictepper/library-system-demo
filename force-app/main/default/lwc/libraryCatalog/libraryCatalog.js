@@ -2,6 +2,7 @@ import { LightningElement, track, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 
 import getLibraryItems from '@salesforce/apex/CatalogController.getLibraryItems';
+import getTotalPages from '@salesforce/apex/CatalogController.getTotalPages';
 
 export default class LibraryCatalog extends LightningElement {
     @track libraryUpdate;
@@ -11,7 +12,14 @@ export default class LibraryCatalog extends LightningElement {
     @track nameSearch = "";
     @track statusSearch = "";
     @track currPage = '';
-    @track totalPages = '';
+
+    @wire(getTotalPages, { 
+        barcodeSearch: '$barcodeSearch',
+        typeSearch: '$typeSearch',
+        nameSearch: '$nameSearch',
+        statusSearch: '$statusSearch'
+    })
+    totalPages;
 
     @wire(getLibraryItems, { 
         barcodeSearch: '$barcodeSearch',
