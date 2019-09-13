@@ -2,8 +2,8 @@ import { LightningElement, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 
-import getHighestAvailableBarcode from '@salesforce/apex/controller.getHighestAvailableBarcode';
-import checkout from '@salesforce/apex/controller.checkout';
+import getHighestAvailableBarcode from '@salesforce/apex/CheckoutController.getHighestAvailableBarcode';
+import checkout from '@salesforce/apex/CheckoutController.checkout';
 
 export default class LibraryCheckout extends LightningElement {
     @track barcodeUpdate;  // variable to allow refreshApex(this.barcodeUpdate) to work
