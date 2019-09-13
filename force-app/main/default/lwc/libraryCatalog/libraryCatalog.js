@@ -12,7 +12,7 @@ export default class LibraryCatalog extends LightningElement {
     @track typeSearch = "";
     @track nameSearch = "";
     @track statusSearch = "";
-    @track currPage = '1';
+    @track currPage = 1;
     @track totalPages = '';
 
     @wire(getTotalPages, { 
@@ -39,7 +39,8 @@ export default class LibraryCatalog extends LightningElement {
         barcodeSearch: '$barcodeSearch',
         typeSearch: '$typeSearch',
         nameSearch: '$nameSearch',
-        statusSearch: '$statusSearch'
+        statusSearch: '$statusSearch',
+        pageNumber: '$currPage'
     })
     wiredLibraryItems(libraryUpdate) {
         this.libraryUpdate = libraryUpdate;
@@ -76,15 +77,19 @@ export default class LibraryCatalog extends LightningElement {
         switch (source[1]) {
             case 'bar':
                 this.barcodeSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             case 'type':
                 this.typeSearch = event.detail.value;
+                this.resetPageNumber();
                 break;
             case 'name':
                 this.nameSearch = event.target.value;
+                this.resetPageNumber();
                 break;
             case 'status':
                 this.statusSearch = event.detail.value;
+                this.resetPageNumber();
                 break;
             case 'pnum':
                 if (event.target.value) {
@@ -111,5 +116,12 @@ export default class LibraryCatalog extends LightningElement {
                 break;
         }
         return refreshApex(this.libraryUpdate);
+    }
+
+    // Resets page number when search terms are updated.
+    resetPageNumber() {
+        var inputField = this.template.querySelector('.pnum');
+        inputField.value = '1';
+        this.currPage = 1;
     }
 }
