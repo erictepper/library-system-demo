@@ -3,6 +3,35 @@ public with sharing class RecordsController {
 
     }
 
+    // gets the total number of pages with the current search. 
+    @AuraEnabled(cacheable=true)
+    public static Integer getTotalPages(String usernameSearch, String barcodeSearch, 
+        String typeSearch, String itemNameSearch, String checkoutSearch, String returnSearch) {
+    // adds each search term as an element in the search criteria array
+        String whereClause = '';
+        String[] criteria = new String[]{};
+        if (!usernameSearch.equals('')) {
+            usernameSearch = '%' + usernameSearch + '%';
+            criteria.add('User__r.Username LIKE :usernameSearch');
+        }
+        if (!barcodeSearch.equals('')) {
+            barcodeSearch = '%' + barcodeSearch + '%';
+            criteria.add('Library_Item__r.Name LIKE :barcodeSearch');
+        }
+        if (!typeSearch.equals('')) criteria.add('Library_Item__r.Type__c LIKE :typeSearch');
+        if (!itemNameSearch.equals('')) {
+            itemNameSearch = '%' + itemNameSearch + '%';
+            criteria.add('Library_Item__r.Title__c LIKE :itemNameSearch');
+        }
+
+        // fills the WHERE clause with the search criteria
+        if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
+
+        Integer results = Database.countQuery('SELECT COUNT() FROM Library_Checkout__c ' + whereClause);
+        if (results == 0) return 1;
+        else return (results / 15 + 1);
+    }
+
     // gets the list of checkout records for the borrowing history, using optional search terms. 
     @AuraEnabled(cacheable=true)
     public static Library_Checkout__c[] getCheckoutRecords(String usernameSearch, String barcodeSearch, 
