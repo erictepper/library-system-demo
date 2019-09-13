@@ -1,12 +1,18 @@
-table.search td.barcode { padding-right:1%; }
-table.search td.type { padding-right:1%; }
-table.search td.name { padding-right:1%; }
+table.search td.barcode { padding-right: 1%; }
+table.search td.type { padding-right: 1%; }
+table.search td.name { padding-right: 1%; }
 
-tr.header { font-weight:bold; }
-td.barcode { width:8%; }
-td.type { width:12%; }
-td.name { width:70%; }
-td.status { width:10%; }
+tr.header { font-weight: bold; }
+td.barcode { width: 8%; }
+td.type { width: 12%; }
+td.name { width: 70%; }
+td.status { width: 10%; }
 
-span.available { color:green; }
-span.unavailable { color:red; }
+span.available { color: green; }
+span.unavailable { color: red; }
+
+.pageSelect {
+    width: 20%; 
+}
+
+input { text-align: center; }
