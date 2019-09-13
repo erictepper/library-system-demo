@@ -22,7 +22,6 @@ export default class LibraryCatalog extends LightningElement {
         statusSearch: '$statusSearch'
     })
     wiredTotalPages(totalPagesWire) {
-        console.log(totalPagesWire);
         this.totalPagesWire = totalPagesWire;
         const { error, data } = totalPagesWire;
         if (data) {
