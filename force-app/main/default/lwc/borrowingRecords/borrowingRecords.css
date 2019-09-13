@@ -19,6 +19,6 @@ tr.header { font-weight:bold; }
 td.username { width: 10%; padding-right: 1%; }
 td.barcode { width: 8%; padding-right: 1%; }
 td.itemType { width: 12%; padding-right: 1%; }
-td.itemName { width: 40%; padding-right: 1%; }
-td.checkout { width: 15%; padding-right: 1%; }
-td.return { width: 15%; }
+td.itemName { width: 36%; padding-right: 1%; }
+td.checkout { width: 17%; padding-right: 1%; }
+td.return { width: 17%; }
