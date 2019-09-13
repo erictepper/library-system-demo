@@ -23,6 +23,14 @@ public with sharing class RecordsController {
             itemNameSearch = '%' + itemNameSearch + '%';
             criteria.add('Library_Item__r.Title__c LIKE :itemNameSearch');
         }
+        if (!checkoutSearch.equals('')) {
+            Datetime checkoutDate = Datetime.parse(checkoutSearch);
+            criteria.add('Checkout_Date__c < :checkoutDate');
+        }
+        if (!returnSearch.equals('')) {
+            DateTime returnDate = Datetime.parse(returnSearch);
+            criteria.add('Return_Date__c < :returnDate');
+        }
 
         // fills the WHERE clause with the search criteria
         if (criteria.size() > 0) whereClause = 'WHERE ' + String.join(criteria, ' AND ');
@@ -51,6 +59,14 @@ public with sharing class RecordsController {
         if (!itemNameSearch.equals('')) {
             itemNameSearch = '%' + itemNameSearch + '%';
             criteria.add('Library_Item__r.Title__c LIKE :itemNameSearch');
+        }
+        if (!checkoutSearch.equals('')) {
+            Datetime checkoutDate = Datetime.parse(checkoutSearch);
+            criteria.add('Checkout_Date__c < :checkoutDate');
+        }
+        if (!returnSearch.equals('')) {
+            DateTime returnDate = Datetime.parse(returnSearch);
+            criteria.add('Return_Date__c < :returnDate');
         }
 
         // fills the WHERE clause with the search criteria
