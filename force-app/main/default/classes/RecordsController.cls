@@ -1,5 +1,5 @@
-public with sharing class controller {
-    public controller() {
+public with sharing class RecordsController {
+    public RecordsController() {
 
     }
 

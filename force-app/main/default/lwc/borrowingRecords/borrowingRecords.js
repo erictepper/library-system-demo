@@ -1,8 +1,8 @@
 import { LightningElement, track, wire } from 'lwc';
 import { refreshApex } from '@salesforce/apex';
 
-import getBorrowingUsers from '@salesforce/apex/controller.getBorrowingUsers';
-import getCheckoutRecords from '@salesforce/apex/controller.getCheckoutRecords';
+import getBorrowingUsers from '@salesforce/apex/RecordsController.getBorrowingUsers';
+import getCheckoutRecords from '@salesforce/apex/RecordsController.getCheckoutRecords';
 
 export default class BorrowingHistory extends LightningElement {
     // apex refresh fields
