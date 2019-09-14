@@ -17,6 +17,9 @@
             ],
             "c/pubsub": [
                 "pubsub/pubsub.js"
+            ],
+            "c/libraryReturn": [
+                "libraryReturn/libraryReturn.js"
             ]
         }
     },

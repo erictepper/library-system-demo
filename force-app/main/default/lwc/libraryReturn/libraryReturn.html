@@ -1,0 +1,11 @@
+<template>
+        <lightning-card title="Return" icon-name="standard:return_order_line_item">
+            <div class="slds-m-around_medium">
+                <lightning-input label="Barcode" value={barcodeSearch} onchange={changeHandler} onkeyup={submitHandler} id="bar" class="bar"></lightning-input>
+                <br />
+                <center>
+                    <lightning-button variant="base" label="Return" title="Return" onclick={changeHandler} class="slds-m-left_x-small" id="submit"></lightning-button>
+                </center>
+            </div>
+        </lightning-card>
+    </template>
