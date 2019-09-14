@@ -31,6 +31,7 @@ export default class LibraryCatalog extends LightningElement {
     }
 
     checkoutHandler() {
+        console.log('test');
         refreshApex(this.libraryUpdate)
     }
 
