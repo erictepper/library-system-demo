@@ -15,11 +15,11 @@
             "c/libraryCheckout": [
                 "libraryCheckout/libraryCheckout.js"
             ],
-            "c/pubsub": [
-                "pubsub/pubsub.js"
-            ],
             "c/libraryReturn": [
                 "libraryReturn/libraryReturn.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
             ]
         }
     },
