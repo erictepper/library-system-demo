@@ -19,5 +19,8 @@ trigger IsValidCheckout on Library_Checkout__c (before insert)  {
         // Checks dates
         if (String.valueOf(curr.Checkout_Date__c) == null) curr.addError('Must add a checkout date!');
         if (String.valueOf(curr.Return_Date__c) != null) curr.addError('Cannot check out and return an item at the same time!');
+
+        // Once all fields have been validated, sets due date for a week after checkout date
+        curr.Due_Date__c = curr.Checkout_Date__c.addDays(7);
     }
 }
