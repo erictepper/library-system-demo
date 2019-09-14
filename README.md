@@ -1,6 +1,6 @@
 # library-system-demo
 ## General Info
-Version 0.5.3
+Version 0.6.0
 
 System that can track books and AV equipment that employees borrow from a library. Implemented on the Salesforce platform. 
 
@@ -21,8 +21,11 @@ System that can track books and AV equipment that employees borrow from a librar
 * **0.5.2:** Bug fix: records will now be searchable by date.
 * **0.5.3:** Added inter-component event handling using pubsub.
 
+**Version 0.6:** Added functionality to return library items. 
+
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running. (optional - not necessary)
+* Add links to username field in borrowing history.
 
 ## Demo Information
 ### 1. Library System
