@@ -19,7 +19,7 @@ System that can track books and AV equipment that employees borrow from a librar
 **Version 0.5:** Added functionality for tracking checkout information, including which users currently have items checked out as well as the borrowing history for each item. 
 * **0.5.1:** Added paginator to catalog and checkout records. 
 * **0.5.2:** Bug fix: records will now be searchable by date.
-* **0.5.3:** Added inter-component event handling.
+* **0.5.3:** Added inter-component event handling using pubsub.
 
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running. (optional - not necessary)
