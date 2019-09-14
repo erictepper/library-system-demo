@@ -43,7 +43,6 @@ export default class BorrowingHistory extends LightningElement {
     }
 
     checkoutHandler() {
-        console.log('test');
         refreshApex(this.recordsUpdate);
         refreshApex(this.checkoutUpdate);
         refreshApex(this.totalPagesWire);
