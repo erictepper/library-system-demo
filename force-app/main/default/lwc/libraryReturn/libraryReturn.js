@@ -4,7 +4,7 @@ import { CurrentPageReference } from 'lightning/navigation';
 import { refreshApex } from '@salesforce/apex';
 
 import { fireEvent } from 'c/pubsub';
-import getHighestAvailableBarcode from '@salesforce/apex/CheckoutController.getHighestAvailableBarcode';
+import getHighestUnavailableBarcode from '@salesforce/apex/ReturnController.getHighestUnavailableBarcode';
 import returnItem from '@salesforce/apex/ReturnController.returnItem';
 
 export default class LibraryReturn extends LightningElement {
@@ -15,7 +15,7 @@ export default class LibraryReturn extends LightningElement {
 
     // gets the highest available barcode and sets it to the barcode input
     // field to allow for rapid returns
-    @wire(getHighestAvailableBarcode)
+    @wire(getHighestUnavailableBarcode)
     wiredBarcode(barcodeUpdate) {
         // variable to allow refreshApex(this.barcodeUpdate) to work
         this.barcodeUpdate = barcodeUpdate;
@@ -55,9 +55,6 @@ export default class LibraryReturn extends LightningElement {
                 this.returnHelper();
                 break;
             default:
-                // updates the username input field with the source name for debugging, 
-                // to be removed and replaced with just a break statement
-                this.userSearch = source[1];
                 break;
         }
     }
@@ -77,8 +74,7 @@ export default class LibraryReturn extends LightningElement {
         // barcode after a library item is returned
         var inputField;
 
-        returnItem({ employeeId: this.userSearch, 
-                barcode: this.barcodeSearch })
+        returnItem({ barcode: this.barcodeSearch })
             .then(result => {
                 this.updateResult = result;
                 if (result !== 'Success.') {
