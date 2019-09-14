@@ -79,8 +79,8 @@ public with sharing class RecordsController {
         Integer offset = (pageNumber - 1) * 15;
 
         return Database.query('SELECT User__r.Username, Library_Item__r.Name, Library_Item__r.Type__c, ' +
-                                      'Library_Item__r.Title__c, FORMAT(Checkout_Date__c) Checkout_Date, ' +
-                                      'FORMAT(Return_Date__c) Return_Date ' +
+                                     'Library_Item__r.Title__c, FORMAT(Checkout_Date__c) Checkout_Date, ' +
+                                     'FORMAT(Return_Date__c) Return_Date ' +
                               'FROM Library_Checkout__c ' + whereClause + ' ' + 
                               'ORDER BY Return_Date__c DESC, Checkout_Date__c DESC, Library_Item__r.Name ' + 
                               'LIMIT 15 OFFSET :offset');
