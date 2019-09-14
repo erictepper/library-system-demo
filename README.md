@@ -22,7 +22,7 @@ System that can track books and AV equipment that employees borrow from a librar
 * **0.5.3:** Checking out an item will now refresh the apex in other lightning web components.
 
 ## To-do
-* Update item trigger to only run if Available__c field has changed, rather than always running.
+* Update item trigger to only run if Available__c field has changed, rather than always running. (not necessary)
 
 ## Demo Information
 ### 1. Library System
