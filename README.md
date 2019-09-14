@@ -1,6 +1,6 @@
 # library-system-demo
 ## General Info
-Version 0.5.2
+Version 0.5.3
 
 System that can track books and AV equipment that employees borrow from a library. Implemented on the Salesforce platform. 
 
@@ -19,6 +19,7 @@ System that can track books and AV equipment that employees borrow from a librar
 **Version 0.5:** Added functionality for tracking checkout information, including which users currently have items checked out as well as the borrowing history for each item. 
 * **0.5.1:** Added paginator to catalog and checkout records. 
 * **0.5.2:** Bug fix: records will now be searchable by date.
+* **0.5.3:** Checking out an item will now refresh the apex in other lightning web components.
 
 ## To-do
 * Update item trigger to only run if Available__c field has changed, rather than always running.
