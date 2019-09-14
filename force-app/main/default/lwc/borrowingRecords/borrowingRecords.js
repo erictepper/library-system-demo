@@ -1,11 +1,15 @@
 import { LightningElement, track, wire } from 'lwc';
+import { CurrentPageReference } from 'lightning/navigation';
 import { refreshApex } from '@salesforce/apex';
 
+import { registerListener, unregisterAllListeners } from 'c/pubsub';
 import getBorrowingUsers from '@salesforce/apex/RecordsController.getBorrowingUsers';
 import getCheckoutRecords from '@salesforce/apex/RecordsController.getCheckoutRecords';
 import getTotalPages from '@salesforce/apex/RecordsController.getTotalPages';
 
 export default class BorrowingHistory extends LightningElement {
+    @wire(CurrentPageReference) pageRef;
+
     // apex refresh fields
     @track checkoutUpdate;
     @track recordsUpdate;
@@ -26,6 +30,22 @@ export default class BorrowingHistory extends LightningElement {
     // page selector fields
     @track currPage = 1;
     @track totalPages = '';
+
+    connectedCallback() {
+        // subscribe to checkout event
+        registerListener('checkout', this.checkoutHandler, this);
+    }
+
+    disconnectedCallback() {
+        // unsubscribe from checkout event
+        unregisterAllListeners(this);
+    }
+
+    checkoutHandler() {
+        refreshApex(this.recordsUpdate);
+        refreshApex(this.checkoutUpdate);
+        refreshApex(this.totalPagesWire);
+    }
 
     @wire(getBorrowingUsers, {})
     wiredBorrowingUsers(checkoutUpdate) {
@@ -154,7 +174,9 @@ export default class BorrowingHistory extends LightningElement {
                 this.nameSearch = source[1];
                 break;
         }
-        return refreshApex(this.recordsUpdate);
+        refreshApex(this.recordsUpdate);
+        refreshApex(this.checkoutUpdate);
+        refreshApex(this.totalPagesWire);
     }
 
     // Resets page number when search terms are updated.
@@ -163,4 +185,5 @@ export default class BorrowingHistory extends LightningElement {
         inputField.value = '1';
         this.currPage = 1;
     }
+    
 }

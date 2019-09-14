@@ -1,11 +1,14 @@
 import { LightningElement, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { CurrentPageReference } from 'lightning/navigation';
 import { refreshApex } from '@salesforce/apex';
 
+import { fireEvent } from 'c/pubsub';
 import getHighestAvailableBarcode from '@salesforce/apex/CheckoutController.getHighestAvailableBarcode';
 import checkout from '@salesforce/apex/CheckoutController.checkout';
 
 export default class LibraryCheckout extends LightningElement {
+    @wire(CurrentPageReference) pageRef; // page reference for event handling
     @track barcodeUpdate;  // variable to allow refreshApex(this.barcodeUpdate) to work
     @track updateResult;  // the result of a checkout submission for debugging. 
     @track userSearch = "";  // the username of the employee checking out
@@ -53,6 +56,7 @@ export default class LibraryCheckout extends LightningElement {
                 break;
             case 'submit':
                 // checks out a book if the input is valid 
+                fireEvent(this.pageRef, 'checkout', event.target.value);
                 this.checkoutHelper();
                 break;
             default:
@@ -67,6 +71,7 @@ export default class LibraryCheckout extends LightningElement {
     submitHandler(event) {
         if (event.keyCode === 13) {
             // checks out a book if the input is valid 
+            fireEvent(this.pageRef, 'checkout', event.target.value);
             this.checkoutHelper();
         }
     }

@@ -1,10 +1,14 @@
 import { LightningElement, track, wire } from 'lwc';
+import { CurrentPageReference } from 'lightning/navigation';
 import { refreshApex } from '@salesforce/apex';
 
+import { registerListener, unregisterAllListeners } from 'c/pubsub';
 import getLibraryItems from '@salesforce/apex/CatalogController.getLibraryItems';
 import getTotalPages from '@salesforce/apex/CatalogController.getTotalPages';
 
 export default class LibraryCatalog extends LightningElement {
+    @wire(CurrentPageReference) pageRef;
+
     @track libraryUpdate;
     @track libraryItems;
     @track totalPagesWire;
@@ -14,6 +18,20 @@ export default class LibraryCatalog extends LightningElement {
     @track statusSearch = "";
     @track currPage = 1;
     @track totalPages = '';
+
+    connectedCallback() {
+        // subscribe to checkout event
+        registerListener('checkout', this.checkoutHandler, this);
+    }
+
+    disconnectedCallback() {
+        // unsubscribe from checkout event
+        unregisterAllListeners(this);
+    }
+
+    checkoutHandler() {
+        refreshApex(this.libraryUpdate)
+    }
 
     @wire(getTotalPages, { 
         barcodeSearch: '$barcodeSearch',
