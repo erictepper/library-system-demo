@@ -73,7 +73,7 @@ export default class LibraryCatalog extends LightningElement {
             this.error = undefined;
         } else if (error) {
             this.error = error;
-            this.contacts = undefined;
+            this.libraryItems = undefined;
         }
     }
 
