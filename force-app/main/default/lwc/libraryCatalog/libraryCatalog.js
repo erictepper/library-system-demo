@@ -120,7 +120,6 @@ export default class LibraryCatalog extends LightningElement {
                 }
                 break;
             default:
-                this.nameSearch = source[1];
                 break;
         }
         return refreshApex(this.libraryUpdate);
