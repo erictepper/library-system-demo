@@ -27,9 +27,8 @@ export default class LibraryCatalog extends LightningElement {
 
     // methods for inter-component event handling
     connectedCallback() {
-        // subscribe to checkout event
-        registerListener('checkout', this.checkoutHandler, this);
-        registerListener('return', this.checkoutHandler, this);
+        registerListener('checkout', this.checkoutHandler, this);  // subscribe to checkout event
+        registerListener('return', this.checkoutHandler, this);  // subscribe to a return event
     }
 
     disconnectedCallback() {
