@@ -80,7 +80,7 @@ export default class LibraryCatalog extends LightningElement {
     // handles changes from search fields/page number input
     changeHandler(event) {
         var digitMatcher;
-        var re = new RegExp('([A-Za-z]+)-?\\d*');
+        var re = new RegExp('([A-Za-z]+)-?\\d*');  // matches "someid-####"
         var source = event.target.id.match(re);
         switch (source[1]) {
             case 'bar':
