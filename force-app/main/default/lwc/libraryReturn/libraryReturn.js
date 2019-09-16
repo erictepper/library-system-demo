@@ -16,7 +16,9 @@ export default class LibraryReturn extends LightningElement {
 
     // the result of a return submission for toast notifications. 
     @track updateResult;
-    @track barcodeSearch = "";  // the barcode of the library item to return
+
+    // return submission input variables
+    @track barcodeSearch = "";
 
     // gets the highest available barcode and sets it to the barcode input
     // field to allow for rapid returns
