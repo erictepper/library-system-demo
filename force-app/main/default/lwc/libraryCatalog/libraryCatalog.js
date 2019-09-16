@@ -34,7 +34,7 @@ export default class LibraryCatalog extends LightningElement {
     }
 
     disconnectedCallback() {
-        // unsubscribe from checkout/return event
+        // unsubscribe from checkout/return events
         unregisterAllListeners(this);
     }
 
