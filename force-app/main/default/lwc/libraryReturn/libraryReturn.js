@@ -8,7 +8,8 @@ import getHighestUnavailableBarcode from '@salesforce/apex/ReturnController.getH
 import returnItem from '@salesforce/apex/ReturnController.returnItem';
 
 export default class LibraryReturn extends LightningElement {
-    @wire(CurrentPageReference) pageRef; // page reference for event handling
+    // pageref for inter-component event handling
+    @wire(CurrentPageReference) pageRef;
     @track barcodeUpdate;  // variable to allow refreshApex(this.barcodeUpdate) to work
     @track updateResult;  // the result of a return submission for debugging. 
     @track barcodeSearch = "";  // the barcode of the library item to return
