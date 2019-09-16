@@ -12,10 +12,12 @@ export default class LibraryCatalog extends LightningElement {
 
     // Variables for refreshApex(this.{variable})
     @track libraryUpdate;
-    @track libraryItems;
     @track totalPagesWire;
 
-    // search field variables
+    // Wire result list
+    @track libraryItems;
+
+    // Search field variables
     @track barcodeSearch = "";
     @track typeSearch = "";
     @track nameSearch = "";

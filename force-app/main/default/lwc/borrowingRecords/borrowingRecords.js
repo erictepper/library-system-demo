@@ -8,18 +8,19 @@ import getCheckoutRecords from '@salesforce/apex/RecordsController.getCheckoutRe
 import getTotalPages from '@salesforce/apex/RecordsController.getTotalPages';
 
 export default class BorrowingHistory extends LightningElement {
+    // pageref for inter-component event handling
     @wire(CurrentPageReference) pageRef;
 
-    // apex refresh fields
+    // Variables for refreshApex(this.{variable})
     @track checkoutUpdate;
     @track recordsUpdate;
     @track totalPagesWire;
 
-    // wire result lists
+    // Wire result lists
     @track borrowingUsers;
     @track checkoutRecords;
 
-    // record search fields
+    // Search field variables
     @track usernameSearch = "";
     @track barcodeSearch = "";
     @track typeSearch = "";
@@ -27,14 +28,14 @@ export default class BorrowingHistory extends LightningElement {
     @track checkoutSearch = "";
     @track returnSearch = "";
 
-    // page selector fields
+    // Paginator variables
     @track currPage = 1;
     @track totalPages = '';
 
+    // Methods for inter-component event handling
     connectedCallback() {
-        // subscribe to checkout event
-        registerListener('checkout', this.checkoutHandler, this);
-        registerListener('return', this.checkoutHandler, this);
+        registerListener('checkout', this.checkoutHandler, this);  // subscribe to checkout event
+        registerListener('return', this.checkoutHandler, this);  // subscribe to return event
     }
 
     disconnectedCallback() {
@@ -48,6 +49,16 @@ export default class BorrowingHistory extends LightningElement {
         refreshApex(this.totalPagesWire);
     }
 
+    // gets options for the picklists in the search field
+    get typeOptions() {
+        return [
+            { label: 'All', value: '' },
+            { label: 'AV', value: 'AV Equipment' },
+            { label: 'Book', value: 'Book' }
+        ]
+    }
+
+    // wire to get users who have items checked out for display in the lwc
     @wire(getBorrowingUsers, {})
     wiredBorrowingUsers(checkoutUpdate) {
         this.checkoutUpdate = checkoutUpdate;
@@ -67,28 +78,7 @@ export default class BorrowingHistory extends LightningElement {
         }
     }
 
-    @wire(getTotalPages, { 
-        usernameSearch: '$usernameSearch',
-        barcodeSearch: '$barcodeSearch',
-        typeSearch: '$typeSearch',
-        itemNameSearch: '$itemNameSearch',
-        checkoutSearch: '$checkoutSearch',
-        returnSearch: '$returnSearch'
-    })
-    wiredTotalPages(totalPagesWire) {
-        this.totalPagesWire = totalPagesWire;
-        const { error, data } = totalPagesWire;
-        if (data) {
-            this.totalPages = data.toString();
-            this.error = undefined;
-        } else if (error) {
-            this.error = error;
-            this.totalPages = '1';
-        } else {
-            this.totalPages = '1';
-        }
-    }
-
+    // wire to get borrowing records for display
     @wire(getCheckoutRecords, { 
         usernameSearch: '$usernameSearch',
         barcodeSearch: '$barcodeSearch',
@@ -114,17 +104,10 @@ export default class BorrowingHistory extends LightningElement {
         }
     }
 
-    get typeOptions() {
-        return [
-            { label: 'All', value: '' },
-            { label: 'AV', value: 'AV Equipment' },
-            { label: 'Book', value: 'Book' }
-        ]
-    }
-
+    // handles changes from search fields/page number input
     changeHandler(event) {
         var digitMatcher;
-        var re = new RegExp('([A-Za-z]+)-?\\d*');
+        var re = new RegExp('([A-Za-z]+)-?\\d*');  // matches "someid-####"
         var source = event.target.id.match(re);
         switch (source[1]) {
             case 'username':
@@ -178,6 +161,29 @@ export default class BorrowingHistory extends LightningElement {
         refreshApex(this.recordsUpdate);
         refreshApex(this.checkoutUpdate);
         refreshApex(this.totalPagesWire);
+    }
+
+    // wires the total number of pages for page display
+    @wire(getTotalPages, { 
+        usernameSearch: '$usernameSearch',
+        barcodeSearch: '$barcodeSearch',
+        typeSearch: '$typeSearch',
+        itemNameSearch: '$itemNameSearch',
+        checkoutSearch: '$checkoutSearch',
+        returnSearch: '$returnSearch'
+    })
+    wiredTotalPages(totalPagesWire) {
+        this.totalPagesWire = totalPagesWire;
+        const { error, data } = totalPagesWire;
+        if (data) {
+            this.totalPages = data.toString();
+            this.error = undefined;
+        } else if (error) {
+            this.error = error;
+            this.totalPages = '1';
+        } else {
+            this.totalPages = '1';
+        }
     }
 
     // Resets page number when search terms are updated.
