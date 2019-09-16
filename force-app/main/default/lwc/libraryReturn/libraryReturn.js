@@ -10,8 +10,12 @@ import returnItem from '@salesforce/apex/ReturnController.returnItem';
 export default class LibraryReturn extends LightningElement {
     // pageref for inter-component event handling
     @wire(CurrentPageReference) pageRef;
-    @track barcodeUpdate;  // variable to allow refreshApex(this.barcodeUpdate) to work
-    @track updateResult;  // the result of a return submission for debugging. 
+
+    // Variables for refreshApex(this.{variable})
+    @track barcodeUpdate;
+
+    // the result of a return submission for toast notifications. 
+    @track updateResult;
     @track barcodeSearch = "";  // the barcode of the library item to return
 
     // gets the highest available barcode and sets it to the barcode input
