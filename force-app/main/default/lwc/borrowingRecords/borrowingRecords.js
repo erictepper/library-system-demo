@@ -155,7 +155,6 @@ export default class BorrowingHistory extends LightningElement {
                 }
                 break;
             default:
-                this.nameSearch = source[1];
                 break;
         }
         refreshApex(this.recordsUpdate);
