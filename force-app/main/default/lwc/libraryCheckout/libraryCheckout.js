@@ -8,9 +8,16 @@ import getHighestAvailableBarcode from '@salesforce/apex/CheckoutController.getH
 import checkout from '@salesforce/apex/CheckoutController.checkout';
 
 export default class LibraryCheckout extends LightningElement {
-    @wire(CurrentPageReference) pageRef; // page reference for event handling
-    @track barcodeUpdate;  // variable to allow refreshApex(this.barcodeUpdate) to work
-    @track updateResult;  // the result of a checkout submission for debugging. 
+    // pageref for inter-component event handling
+    @wire(CurrentPageReference) pageRef;
+
+    // Variables for refreshApex(this.{variable})
+    @track barcodeUpdate;
+
+    // the result of a checkout submission for toast notifications. 
+    @track updateResult;  
+
+    // checkout submission input variables
     @track userSearch = "";  // the username of the employee checking out
     @track barcodeSearch = "";  // the barcode of the library item to check out
 
@@ -60,9 +67,6 @@ export default class LibraryCheckout extends LightningElement {
                 this.checkoutHelper();
                 break;
             default:
-                // updates the username input field with the source name for debugging, 
-                // to be removed and replaced with just a break statement
-                this.userSearch = source[1];
                 break;
         }
     }
