@@ -39,7 +39,7 @@ export default class BorrowingHistory extends LightningElement {
     }
 
     disconnectedCallback() {
-        // unsubscribe from checkout event
+        // unsubscribe from checkout/return events
         unregisterAllListeners(this);
     }
 
